@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Makeup } from '../shared/makeup';
+import { MakeupStoreService } from '../shared/makeup-store.service';
 
 @Component({
   selector: 'ae-makeup-list',
@@ -12,32 +13,34 @@ export class MakeupListComponent implements OnInit {
 
   @Output() showDetailsEvent = new EventEmitter<Makeup>();
 
-  constructor() { }
+  constructor(private ms: MakeupStoreService) { }
 
   ngOnInit(): void {
-    this.makeupItems = [
-        {
-          productname: 'Hoola Matte',
-          brandname: 'Benefit',
-          category: 'Bronzer',
-          opened: new Date(2021, 2, 21),
-          durability: 12
-        },
-        {
-          productname: 'Satin Taupe',
-          brandname: 'MAC',
-          category: 'Eyeshadow',
-          opened: new Date(2020, 6, 13),
-          durability: 24
-        },
-        {
-          productname: 'Mademoiselle',
-          brandname: 'Chanel',
-          category: 'Lipstick',
-          opened: new Date(2020, 9, 7),
-          durability: 6
-        },
-    ]
+    this.makeupItems = this.ms.getAll();
+
+    // this.makeupItems = [
+    //     {
+    //       productname: 'Hoola Matte',
+    //       brandname: 'Benefit',
+    //       category: 'Bronzer',
+    //       opened: new Date(2021, 2, 21),
+    //       durability: 12
+    //     },
+    //     {
+    //       productname: 'Satin Taupe',
+    //       brandname: 'MAC',
+    //       category: 'Eyeshadow',
+    //       opened: new Date(2020, 6, 13),
+    //       durability: 24
+    //     },
+    //     {
+    //       productname: 'Mademoiselle',
+    //       brandname: 'Chanel',
+    //       category: 'Lipstick',
+    //       opened: new Date(2020, 9, 7),
+    //       durability: 6
+    //     },
+    // ]
   }
 
   showDetails(makeup: Makeup) {
