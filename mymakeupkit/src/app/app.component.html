@@ -1,2 +1,12 @@
-<ae-makeup-list></ae-makeup-list>
+<ae-makeup-list
+    *ngIf="viewState === 'list'"
+  (showDetailsEvent)="showDetails($event)">
+</ae-makeup-list>
+
+<ae-makeup-details
+*ngIf="viewState === 'details'"
+  (showListEvent)="showList()"
+  [makeup]="makeup">
+</ae-makeup-details>
+
 <router-outlet></router-outlet>

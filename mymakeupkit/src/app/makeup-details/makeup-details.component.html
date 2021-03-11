@@ -1,0 +1,38 @@
+<div *ngIf="makeup">
+    <h1>{{ makeup.productname }}</h1>
+    <!-- <h3 *ngIf="makeup.brandname">{{ makeup.brandname }}</h3> -->
+    <div class="ui divider"></div>
+    <div class="ui grid">
+    <div class="four wide column">
+        <h4>Brand</h4>
+        <!-- <ng-container *ngFor="let author of book.authors">
+          {{ author }}<br>
+        </ng-container> -->
+        {{ makeup.brandname }}
+      </div>
+      <div class="four wide column">
+        <h4>Category</h4>
+        {{ makeup.category }}
+      </div>
+      <div class="four wide column">
+        <h4>Opened</h4>
+        {{ makeup.opened }}
+      </div>
+      <div class="four wide column">
+        <h4>Durability</h4>
+        <!-- <i class="yellow star icon"
+          *ngFor="let r of getRating(book.rating)"></i> -->
+          {{ makeup.durability }}  months
+      </div>
+    </div>
+    <!-- <h4>Beschreibung</h4>
+    <p>{{ book.description }}</p>
+    <div class="ui small images">
+      <img *ngFor="let thumbnail of book.thumbnails"
+           [src]="thumbnail.url">
+    </div> -->
+    <button class="ui red button"
+            (click)="showMakeupList()">
+      Back to list of makeup
+    </button>
+  </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Makeup } from '../shared/makeup';
 
 @Component({
@@ -9,6 +9,8 @@ import { Makeup } from '../shared/makeup';
 export class MakeupListComponent implements OnInit {
 
   makeupItems: Makeup[] = []; 
+
+  @Output() showDetailsEvent = new EventEmitter<Makeup>();
 
   constructor() { }
 
@@ -36,6 +38,10 @@ export class MakeupListComponent implements OnInit {
           durability: 6
         },
     ]
+  }
+
+  showDetails(makeup: Makeup) {
+    this.showDetailsEvent.emit(makeup);
   }
 
 }

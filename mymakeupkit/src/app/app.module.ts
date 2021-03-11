@@ -5,12 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MakeupListComponent } from './makeup-list/makeup-list.component';
 import { MakeupItemComponent } from './makeup-item/makeup-item.component';
+import { MakeupDetailsComponent } from './makeup-details/makeup-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MakeupListComponent,
-    MakeupItemComponent
+    MakeupItemComponent,
+    MakeupDetailsComponent
   ],
   imports: [
     BrowserModule,
