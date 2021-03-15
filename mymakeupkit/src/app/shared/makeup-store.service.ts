@@ -10,6 +10,7 @@ export class MakeupStoreService {
   constructor() { 
     this.makeupItems = [
       {
+        id: "1",
         productname: 'Hoola Matte',
         brandname: 'Benefit',
         category: 'Bronzer',
@@ -17,6 +18,7 @@ export class MakeupStoreService {
         durability: 12
       },
       {
+        id: "2",
         productname: 'Satin Taupe',
         brandname: 'MAC',
         category: 'Eyeshadow',
@@ -24,17 +26,20 @@ export class MakeupStoreService {
         durability: 24
       },
       {
+        id: "3",
         productname: 'Mademoiselle',
         brandname: 'Chanel',
         category: 'Lipstick',
         opened: new Date(2020, 9, 7),
         durability: 6
       },
-  ]
-}
+    ]
+  }
+  getAll(): Makeup[] {
+    return this.makeupItems;
+  }
 
-getAll(): Makeup[] {
-  return this.makeupItems;
-}
-
+  getSingle(id: string): Makeup | undefined {
+    return this.makeupItems.find(makeup => (makeup.id === id));
+  }
 }

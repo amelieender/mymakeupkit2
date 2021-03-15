@@ -1,5 +1,5 @@
 <div *ngIf="makeup">
-    <h1>{{ makeup.productname }}</h1>
+    <h1>{{ makeup.id }} {{ makeup.productname }}</h1>
     <!-- <h3 *ngIf="makeup.brandname">{{ makeup.brandname }}</h3> -->
     <div class="ui divider"></div>
     <div class="ui grid">
@@ -31,8 +31,8 @@
       <img *ngFor="let thumbnail of book.thumbnails"
            [src]="thumbnail.url">
     </div> -->
-    <button class="ui red button"
+    <!-- <button class="ui red button"
             (click)="showMakeupList()">
       Back to list of makeup
-    </button>
+    </button> -->
   </div>

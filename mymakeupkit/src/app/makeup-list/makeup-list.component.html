@@ -2,7 +2,7 @@
   <ae-makeup-item class="item"
     *ngFor="let makeup of makeupItems" 
     [makeup]="makeup"
-    (click)="showDetails(makeup)">
+    [routerLink]="makeup.id">
   </ae-makeup-item>
 </div>
     

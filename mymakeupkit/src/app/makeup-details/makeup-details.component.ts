@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Makeup } from '../shared/makeup';
+import { MakeupStoreService } from '../shared/makeup-store.service';
 
 @Component({
   selector: 'ae-makeup-details',
@@ -7,20 +9,22 @@ import { Makeup } from '../shared/makeup';
   styleUrls: ['./makeup-details.component.css']
 })
 export class MakeupDetailsComponent implements OnInit {
-  @Input() makeup!: Makeup;
-  @Output() showListEvent = new EventEmitter<any>();
+  makeup: Makeup | undefined;
 
-  constructor() { }
+  constructor(private ms: MakeupStoreService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      const id = params['id'];
+      if (id) {
+        this.makeup = this.ms.getSingle(id);
+        console.log(this.makeup)
+      }
+    });
   }
 
-  getRating(num: number) {
-    return new Array(num);
-  }
-
-  showMakeupList() {
-    this.showListEvent.emit();
-  }
+  // showMakeupList() {
+  //   this.showListEvent.emit();
+  // }
 
 }
