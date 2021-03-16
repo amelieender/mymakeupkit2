@@ -1,12 +1,6 @@
-<!-- <ae-makeup-list
-    *ngIf="viewState === 'list'"
-  (showDetailsEvent)="showDetails($event)">
-</ae-makeup-list>
-
-<ae-makeup-details
-*ngIf="viewState === 'details'"
-  (showListEvent)="showList()"
-  [makeup]="makeup">
-</ae-makeup-details> -->
+<div class="ui menu">
+  <a routerLink="home" routerLinkActive="active" class="item">Home</a>
+  <a routerLink="makeup" routerLinkActive="active" class="item">MakeUp</a>
+</div>
 
 <router-outlet></router-outlet>

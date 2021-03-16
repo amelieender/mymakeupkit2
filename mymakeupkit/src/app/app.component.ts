@@ -11,15 +11,15 @@ type ViewState = 'list' | 'details';
 export class AppComponent {
 
   // title = 'mymakeupkit';
-  makeup!: Makeup;
-  viewState: ViewState = 'list';
+  // makeup!: Makeup;
+  // viewState: ViewState = 'list';
 
-  showList() {
-    this.viewState = 'list';
-  }
+  // showList() {
+  //   this.viewState = 'list';
+  // }
 
-  showDetails(makeup: Makeup) {
-    this.makeup = makeup;
-    this.viewState = 'details';
-  }
+  // showDetails(makeup: Makeup) {
+  //   this.makeup = makeup;
+  //   this.viewState = 'details';
+  // }
 }

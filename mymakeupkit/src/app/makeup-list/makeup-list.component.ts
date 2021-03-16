@@ -11,7 +11,7 @@ export class MakeupListComponent implements OnInit {
 
   makeupItems: Makeup[] = []; 
 
-  @Output() showDetailsEvent = new EventEmitter<Makeup>();
+  // @Output() showDetailsEvent = new EventEmitter<Makeup>();
 
   constructor(private ms: MakeupStoreService) { }
 
@@ -19,8 +19,8 @@ export class MakeupListComponent implements OnInit {
     this.makeupItems = this.ms.getAll();
   }
 
-  showDetails(makeup: Makeup) {
-    this.showDetailsEvent.emit(makeup);
-  }
+  // showDetails(makeup: Makeup) {
+  //   this.showDetailsEvent.emit(makeup);
+  // }
 
 }
