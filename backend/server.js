@@ -14,6 +14,8 @@ app.get("/", (req, res) => {
     res.json({ message: "Hello!" });
 });
 
+require("./app/routes/makeup.routes.js")(app);
+
 // set port, listen for requests
 app.listen(3000, () => {
     console.log("Server is running on port 3000.");
