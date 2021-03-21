@@ -11,21 +11,21 @@ const MakeupItem = function(item) {
 
 const tableName = 'makeupItems';
 
-MakeupItem.create = (newMember, result) => {
-    sql.query("INSERT INTO members SET ?", newMember, (err, res) => {
+MakeupItem.create = (item, result) => {
+    sql.query(`INSERT INTO ${tableName} SET ?`, item, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
             return;
         }
 
-        console.log("created member: ", { id: res.insertId, ...newMember });
-        result(null, { id: res.insertId, ...newMember });
+        console.log("created makeupItem: ", { id: res.insertId, ...item });
+        result(null, { id: res.insertId, ...item });
     });
 };
 
-MakeupItem.findById = (memberId, result) => {
-    sql.query(`SELECT * FROM members WHERE id = ${memberId}`, (err, res) => {
+MakeupItem.findById = (id, result) => {
+    sql.query(`SELECT * FROM ${tableName} WHERE id = ${id}`, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -56,10 +56,10 @@ MakeupItem.getAll = result => {
     });
 };
 
-MakeupItem.updateById = (id, member, result) => {
+MakeupItem.updateById = (id, item, result) => {
     sql.query(
-        "UPDATE members SET firstname = ?, lastname = ?, email = ? WHERE id = ?",
-        [member.firstname, member.lastname, member.email, id],
+        `UPDATE ${tableName} SET productname = ?, brandname = ?, category = ?, opened = ?, durability = ? WHERE id = ?`,
+        [item.productname, item.brandname, item.category, item.opened, item.durability, id],
         (err, res) => {
             if (err) {
                 console.log("error: ", err);
@@ -68,19 +68,19 @@ MakeupItem.updateById = (id, member, result) => {
             }
 
             if (res.affectedRows == 0) {
-                // not found Customer with the id
+                // not found MakeupItem with the id
                 result({ kind: "not_found" }, null);
                 return;
             }
 
-            console.log("updated member: ", { id: id, ...member });
-            result(null, { id: id, ...member });
+            console.log("updated makeupItem: ", { id: id, ...item });
+            result(null, { id: id, ...item });
         }
     );
 };
 
 MakeupItem.remove = (id, result) => {
-    sql.query("DELETE FROM members WHERE id = ?", id, (err, res) => {
+    sql.query(`DELETE FROM ${tableName} WHERE id = ?`, id, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(null, err);
@@ -88,25 +88,25 @@ MakeupItem.remove = (id, result) => {
         }
 
         if (res.affectedRows == 0) {
-            // not found Member with the id
+            // not found MakeupItem with the id
             result({ kind: "not_found" }, null);
             return;
         }
 
-        console.log("deleted member with id: ", id);
+        console.log("deleted makeupItem with id: ", id);
         result(null, res);
     });
 };
 
 MakeupItem.removeAll = result => {
-    sql.query("DELETE FROM members", (err, res) => {
+    sql.query(`DELETE FROM ${tableName}`, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(null, err);
             return;
         }
 
-        console.log(`deleted ${res.affectedRows} members`);
+        console.log(`deleted ${res.affectedRows} makeupItems`);
         result(null, res);
     });
 };
