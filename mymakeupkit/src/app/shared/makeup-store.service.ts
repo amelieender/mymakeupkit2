@@ -1,45 +1,22 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
 import { Makeup } from './makeup';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MakeupStoreService {
-  makeupItems: Makeup[] = []; 
+  baseUrl = 'http://localhost:3000/makeup';
 
-  constructor() { 
-    this.makeupItems = [
-      {
-        id: "1",
-        productname: 'Hoola Matte',
-        brandname: 'Benefit',
-        category: 'Bronzer',
-        opened: new Date(2021, 2, 21),
-        durability: 12
-      },
-      {
-        id: "2",
-        productname: 'Satin Taupe',
-        brandname: 'MAC',
-        category: 'Eyeshadow',
-        opened: new Date(2020, 6, 13),
-        durability: 24
-      },
-      {
-        id: "3",
-        productname: 'Mademoiselle',
-        brandname: 'Chanel',
-        category: 'Lipstick',
-        opened: new Date(2020, 9, 7),
-        durability: 6
-      },
-    ]
-  }
-  getAll(): Makeup[] {
-    return this.makeupItems;
+  constructor(private http: HttpClient) { }
+
+  getAll(): Observable<Makeup[]> {
+    return this.http.get<Makeup[]>(this.baseUrl);
   }
 
-  getSingle(id: string): Makeup | undefined {
-    return this.makeupItems.find(makeup => (makeup.id === id));
+  getSingle(id: number): Observable<Makeup> {
+    return this.http.get<Makeup>(`${this.baseUrl}/${id}`);
   }
 }

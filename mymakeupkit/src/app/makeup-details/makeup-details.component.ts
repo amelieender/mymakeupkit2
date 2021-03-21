@@ -17,14 +17,16 @@ export class MakeupDetailsComponent implements OnInit {
     this.route.params.subscribe(params => {
       const id = params['id'];
       if (id) {
-        this.makeup = this.ms.getSingle(id);
-        console.log(this.makeup)
+        this.getMakeupItem(id);
       }
     });
   }
 
-  // showMakeupList() {
-  //   this.showListEvent.emit();
-  // }
+  getMakeupItem(id: number): void {
+    this.ms.getSingle(id).subscribe(
+      (response: Makeup) => this.makeup = response,
+      error => console.log(error)
+      );
+  }
 
 }

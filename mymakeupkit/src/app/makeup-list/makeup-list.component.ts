@@ -16,7 +16,14 @@ export class MakeupListComponent implements OnInit {
   constructor(private ms: MakeupStoreService) { }
 
   ngOnInit(): void {
-    this.makeupItems = this.ms.getAll();
+    this.readAll();
+  }
+
+  readAll(): void {
+    this.ms.getAll().subscribe(
+      (response: Makeup[]) => this.makeupItems = response,
+      error => console.log(error)
+    );
   }
 
   // showDetails(makeup: Makeup) {

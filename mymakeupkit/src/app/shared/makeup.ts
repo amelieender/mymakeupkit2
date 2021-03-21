@@ -1,5 +1,5 @@
 export interface Makeup {
-    id: string;
+    id: number;
     productname: string;
     brandname: string;
     category: string;
