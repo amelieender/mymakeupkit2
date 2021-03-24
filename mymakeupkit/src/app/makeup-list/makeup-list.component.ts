@@ -11,8 +11,6 @@ export class MakeupListComponent implements OnInit {
 
   makeupItems: Makeup[] = []; 
 
-  // @Output() showDetailsEvent = new EventEmitter<Makeup>();
-
   constructor(private ms: MakeupStoreService) { }
 
   ngOnInit(): void {
@@ -25,9 +23,5 @@ export class MakeupListComponent implements OnInit {
       error => console.log(error)
     );
   }
-
-  // showDetails(makeup: Makeup) {
-  //   this.showDetailsEvent.emit(makeup);
-  // }
 
 }

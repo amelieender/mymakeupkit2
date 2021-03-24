@@ -10,6 +10,7 @@ import { MakeupStoreService } from '../shared/makeup-store.service';
 })
 export class MakeupDetailsComponent implements OnInit {
   makeup: Makeup | undefined;
+  editMode: boolean = false;
 
   constructor(private ms: MakeupStoreService, private route: ActivatedRoute) {}
 
@@ -27,6 +28,10 @@ export class MakeupDetailsComponent implements OnInit {
       (response: Makeup) => this.makeup = response,
       error => console.log(error)
       );
+  }
+
+  toggleEditMode(toggle: boolean) {
+    this.editMode = toggle;
   }
 
 }

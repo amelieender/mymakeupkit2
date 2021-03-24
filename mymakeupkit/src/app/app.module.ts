@@ -8,6 +8,8 @@ import { MakeupListComponent } from './makeup-list/makeup-list.component';
 import { MakeupItemComponent } from './makeup-item/makeup-item.component';
 import { MakeupDetailsComponent } from './makeup-details/makeup-details.component';
 import { HomeComponent } from './home/home.component';
+import { MakeupFormComponent } from './makeup-details/makeup-form/makeup-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,12 +17,14 @@ import { HomeComponent } from './home/home.component';
     MakeupListComponent,
     MakeupItemComponent,
     MakeupDetailsComponent,
-    HomeComponent
+    HomeComponent,
+    MakeupFormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
