@@ -22,8 +22,8 @@
     <button class="ui blue button" (click)="toggleEditMode(true)">
       Edit
     </button>
-    <button class="ui red button">
+    <button class="ui red button" (click)="deleteOne(makeup)">
       Delete
     </button>
-    <ae-makeup-form [makeup]="makeup" *ngIf="editMode"></ae-makeup-form>
+    <ae-makeup-form [makeup]="makeup" *ngIf="editMode" (updateEvent)="update($event)"></ae-makeup-form>
 </div>

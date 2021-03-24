@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Makeup } from '../shared/makeup';
 import { MakeupStoreService } from '../shared/makeup-store.service';
 
@@ -12,7 +12,7 @@ export class MakeupDetailsComponent implements OnInit {
   makeup: Makeup | undefined;
   editMode: boolean = false;
 
-  constructor(private ms: MakeupStoreService, private route: ActivatedRoute) {}
+  constructor(private ms: MakeupStoreService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -32,6 +32,20 @@ export class MakeupDetailsComponent implements OnInit {
 
   toggleEditMode(toggle: boolean) {
     this.editMode = toggle;
+  }
+
+  update(makeup: Makeup): void {
+    console.log(makeup);
+    this.makeup = makeup;
+    this.ms.update(this.makeup.id, this.makeup);
+    // this.router.navigateByUrl('/makeup');
+  }
+
+  deleteOne(makeup: Makeup): void {
+    console.log(makeup);
+    this.makeup = makeup;
+    this.ms.deleteOne(this.makeup.id);
+    this.router.navigateByUrl('/makeup');
   }
 
 }

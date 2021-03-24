@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Location } from '@angular/common';
 import { Makeup } from 'src/app/shared/makeup';
@@ -9,7 +9,8 @@ import { Makeup } from 'src/app/shared/makeup';
   styleUrls: ['./makeup-form.component.css']
 })
 export class MakeupFormComponent implements OnInit {
-  @Input() makeup: Makeup | undefined;
+  @Input() makeup!: Makeup;
+  @Output() updateEvent = new EventEmitter<Makeup>();
   form: FormGroup;
 
   constructor(private fb: FormBuilder, private location: Location) {
@@ -38,7 +39,15 @@ export class MakeupFormComponent implements OnInit {
 
   onSubmit(): void {
     console.log("submit");
-    console.warn(this.form.value);
+    const values = this.form.value;
+    console.log(values);
+    this.makeup.id = values.idControl;
+    this.makeup.productname = values.productnameControl;
+    this.makeup.brandname = values.brandnameControl;
+    this.makeup.category = values.categoryControl;
+    this.makeup.opened = values.openedControl;
+    this.makeup.durability = values.durabilityControl;
+    this.updateEvent.emit(this.makeup);
   }
 
   cancel(): void {
