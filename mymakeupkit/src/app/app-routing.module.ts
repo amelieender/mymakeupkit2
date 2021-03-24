@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { MakeupDetailsComponent } from './makeup-details/makeup-details.component';
 import { MakeupListComponent } from './makeup-list/makeup-list.component';
+import {MakeupCreateComponent} from './makeup-create/makeup-create.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: 'makeup/:id',
     component: MakeupDetailsComponent
+  },
+  {
+    path: 'create',
+    component: MakeupCreateComponent
   },
 ];
 

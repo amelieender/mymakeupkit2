@@ -10,6 +10,7 @@ import { MakeupDetailsComponent } from './makeup-details/makeup-details.componen
 import { HomeComponent } from './home/home.component';
 import { MakeupFormComponent } from './makeup-details/makeup-form/makeup-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MakeupCreateComponent } from './makeup-create/makeup-create.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MakeupItemComponent,
     MakeupDetailsComponent,
     HomeComponent,
-    MakeupFormComponent
+    MakeupFormComponent,
+    MakeupCreateComponent
   ],
   imports: [
     BrowserModule,
