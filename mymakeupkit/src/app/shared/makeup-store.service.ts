@@ -45,4 +45,16 @@ export class MakeupStoreService {
         }
       );
   }
+
+  create(makeup: Makeup): void {
+    this.http.post<Makeup>(this.baseUrl, makeup)
+      .subscribe(
+        response => {
+          console.log(response);
+        },
+        error => {
+          console.log(error);
+        }
+      );
+  }
 }
