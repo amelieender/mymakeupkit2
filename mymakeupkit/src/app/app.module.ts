@@ -11,6 +11,8 @@ import { HomeComponent } from './home/home.component';
 import { MakeupFormComponent } from './makeup-form/makeup-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MakeupCreateComponent } from './makeup-create/makeup-create.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { MakeupCreateComponent } from './makeup-create/makeup-create.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

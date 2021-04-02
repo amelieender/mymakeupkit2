@@ -1,7 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Makeup } from '../shared/makeup';
 import { MakeupStoreService } from '../shared/makeup-store.service';
+
+export interface DialogData {
+  title: string;
+}
 
 @Component({
   selector: 'ae-makeup-details',
@@ -12,7 +17,7 @@ export class MakeupDetailsComponent implements OnInit {
   makeup: Makeup | undefined;
   editMode: boolean = false;
 
-  constructor(private ms: MakeupStoreService, private route: ActivatedRoute, private router: Router) {}
+  constructor(private ms: MakeupStoreService, private route: ActivatedRoute, private router: Router, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -37,15 +42,58 @@ export class MakeupDetailsComponent implements OnInit {
   update(makeup: Makeup): void {
     console.log(makeup);
     this.makeup = makeup;
-    this.ms.update(this.makeup.id, this.makeup);
-    this.router.navigateByUrl('/makeup');
+    this.openDialog({ title: 'Confirm Update'}, () => {
+      if (this.makeup) {
+        this.ms.update(this.makeup.id, this.makeup);
+        this.router.navigateByUrl('/makeup');
+      }
+    });
   }
 
   deleteOne(makeup: Makeup): void {
     console.log(makeup);
     this.makeup = makeup;
-    this.ms.deleteOne(this.makeup.id);
-    this.router.navigateByUrl('/makeup');
+    this.openDialog({ title: 'Confirm Deletion'}, () => {
+      if (this.makeup) {
+        this.ms.deleteOne(this.makeup.id);
+        this.router.navigateByUrl('/makeup');
+      }
+    });
+  }
+
+  openDialog(data: DialogData, callback: Function): void {
+    const dialogRef = this.dialog.open(ConfirmDialog, {
+      width: '250px',
+      data
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed', result);
+      if (result) {
+        callback();
+      }
+    });
+  }
+
+}
+
+@Component({
+  selector: 'confirm-dialog',
+  templateUrl: 'confirm-dialog.html',
+})
+export class ConfirmDialog {
+
+  constructor(
+    public dialogRef: MatDialogRef<ConfirmDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
+  ) {}
+
+  onNoClick(): void {
+    this.dialogRef.close(false);
+  }
+
+  onYesClick(): void {
+    this.dialogRef.close(true);
   }
 
 }
