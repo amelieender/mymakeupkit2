@@ -38,7 +38,7 @@ export class MakeupDetailsComponent implements OnInit {
     console.log(makeup);
     this.makeup = makeup;
     this.ms.update(this.makeup.id, this.makeup);
-    // this.router.navigateByUrl('/makeup');
+    this.router.navigateByUrl('/makeup');
   }
 
   deleteOne(makeup: Makeup): void {

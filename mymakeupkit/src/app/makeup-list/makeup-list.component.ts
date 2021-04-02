@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Makeup } from '../shared/makeup';
 import { MakeupStoreService } from '../shared/makeup-store.service';
 
@@ -7,14 +8,14 @@ import { MakeupStoreService } from '../shared/makeup-store.service';
   templateUrl: './makeup-list.component.html',
   styleUrls: ['./makeup-list.component.css']
 })
-export class MakeupListComponent implements OnInit {
+export class MakeupListComponent {
 
   makeupItems: Makeup[] = []; 
 
-  constructor(private ms: MakeupStoreService) { }
-
-  ngOnInit(): void {
-    this.readAll();
+  constructor(private ms: MakeupStoreService, route: ActivatedRoute) {
+    route.params.subscribe(() => {
+      this.readAll();
+    });
   }
 
   readAll(): void {

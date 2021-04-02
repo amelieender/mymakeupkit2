@@ -1,8 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Location } from '@angular/common';
+import { formatDate, Location } from '@angular/common';
 import { Makeup } from 'src/app/shared/makeup';
-import { MakeupStoreService } from '../shared/makeup-store.service';
 
 @Component({
   selector: 'ae-makeup-form',
@@ -17,7 +16,7 @@ export class MakeupFormComponent implements OnInit {
   constructor(private fb: FormBuilder, private location: Location) {
     this.form = this.fb.group(
       {
-        // idControl: [''],
+        idControl: [''],
         productnameControl: ['', Validators.required],
         brandnameControl: ['', Validators.required],
         categoryControl: ['', Validators.required],
@@ -39,23 +38,17 @@ export class MakeupFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log("submit");
     const values = this.form.value;
-    console.log(values);
+    // convert to mysql accepted date format
+    const date = values.openedControl ? formatDate(values.openedControl, 'yyyy-MM-dd', 'en') : undefined;
     this.makeup = {
       id: values.idControl,
       productname: values.productnameControl,
       brandname: values.brandnameControl,
       category: values.categoryControl,
-      opened: values.openedControl,
+      opened: date,
       durability: values.durabilityControl
     };
-    // this.makeup.id = values.idControl;
-    // this.makeup.productname = values.productnameControl;
-    // this.makeup.brandname = values.brandnameControl;
-    // this.makeup.category = values.categoryControl;
-    // this.makeup.opened = values.openedControl;
-    // this.makeup.durability = values.durabilityControl;
     this.updateEvent.emit(this.makeup);
   }
 
