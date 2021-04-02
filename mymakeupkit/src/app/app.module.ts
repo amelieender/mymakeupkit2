@@ -13,6 +13,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MakeupCreateComponent } from './makeup-create/makeup-create.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     MakeupDetailsComponent,
     HomeComponent,
     MakeupFormComponent,
-    MakeupCreateComponent
+    MakeupCreateComponent,
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
