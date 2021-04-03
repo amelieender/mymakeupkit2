@@ -12,18 +12,20 @@
       </div>
       <div class="four wide column">
         <h4>Opened</h4>
-        {{ makeup.opened }}
+        {{ openedDisplayString }}
       </div>
       <div class="four wide column">
         <h4>Durability</h4>
           {{ makeup.durability }}  months
       </div>
     </div>
-    <button class="ui blue button" (click)="toggleEditMode(true)">
-      Edit
-    </button>
-    <button class="ui red button" (click)="deleteOne(makeup)">
-      Delete
-    </button>
+    <div class="buttons">
+      <button mat-raised-button color="primary" (click)="toggleEditMode(true)">
+        Edit
+      </button>
+      <button mat-flat-button color="warn" (click)="deleteOne(makeup)">
+        Delete
+      </button>
+    </div>
     <ae-makeup-form [makeup]="makeup" *ngIf="editMode" (updateEvent)="update($event)"></ae-makeup-form>
 </div>

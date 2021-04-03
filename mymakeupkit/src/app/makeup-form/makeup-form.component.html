@@ -1,6 +1,6 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="form-group row">
-      <label for="inputProductname" class="col-sm-2 col-form-label">productname</label>
+      <label for="inputProductname" class="col-sm-2 col-form-label">Product Name</label>
       <div class="col-sm-10">
         <mat-form-field>
           <input matInput type="text" class="form-control" formControlName="productnameControl" id="inputProductname">
@@ -12,7 +12,7 @@
     </div>
 
     <div class="form-group row">
-      <label for="inputBrandname" class="col-sm-2 col-form-label">brandname</label>
+      <label for="inputBrandname" class="col-sm-2 col-form-label">Brand Name</label>
       <div class="col-sm-10">
         <mat-form-field>
           <input matInput type="text" class="form-control" formControlName="brandnameControl" id="inputBrandname">
@@ -24,7 +24,7 @@
     </div>
 
     <div class="form-group row">
-      <label for="inputCategory" class="col-sm-2 col-form-label">category</label>
+      <label for="inputCategory" class="col-sm-2 col-form-label">Category</label>
       <div class="col-sm-10">
       <mat-form-field>
         <input matInput type="text" class="form-control" formControlName="categoryControl" id="inputCategory">
@@ -36,7 +36,7 @@
     </div>
 
     <div class="form-group row">
-        <label for="inputOpened" class="col-sm-2 col-form-label">opened</label>
+        <label for="inputOpened" class="col-sm-2 col-form-label">Opened</label>
         <div class="col-sm-10">
         <mat-form-field>
           <input matInput [matDatepicker]="picker" class="form-control" formControlName="openedControl" id="inputOpened">
@@ -47,7 +47,7 @@
       </div>
 
     <div class="form-group row">
-        <label for="inputDurability" class="col-sm-2 col-form-label">durability</label>
+        <label for="inputDurability" class="col-sm-2 col-form-label">Durability</label>
         <div class="col-sm-10">
           <mat-form-field>
             <input matInput type="text" class="form-control" formControlName="durabilityControl" id="inputDurability">

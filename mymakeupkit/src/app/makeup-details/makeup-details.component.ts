@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Makeup } from '../shared/makeup';
 import { MakeupStoreService } from '../shared/makeup-store.service';
+import { formatDate } from '@angular/common';
 
 export interface DialogData {
   title: string;
@@ -28,6 +29,10 @@ export class MakeupDetailsComponent implements OnInit {
     });
   }
 
+  get openedDisplayString(): string {
+    return this.makeup?.opened ? formatDate(this.makeup.opened, 'MM-dd-yyyy', 'en') : '';
+  }
+
   getMakeupItem(id: number): void {
     this.ms.getSingle(id).subscribe(
       (response: Makeup) => this.makeup = response,
@@ -40,7 +45,6 @@ export class MakeupDetailsComponent implements OnInit {
   }
 
   update(makeup: Makeup): void {
-    console.log(makeup);
     this.makeup = makeup;
     this.openDialog({ title: 'Confirm Update'}, () => {
       if (this.makeup) {

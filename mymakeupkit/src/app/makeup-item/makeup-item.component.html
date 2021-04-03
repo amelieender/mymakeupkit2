@@ -1,6 +1,6 @@
-<div class="content">
-    <div class="header">{{ makeup.id }}</div>
-    <div class="header">{{ makeup.productname }}</div>
-    <div class="description">{{ makeup.brandname }}</div>
-    <div class="metadata">{{ makeup.category }}</div>
-  </div>
+<mat-list-item class="makeup-item">
+  <h3 matLine>{{ makeup.productname }}</h3>
+  <h5 matLine>{{ makeup.brandname }}</h5>
+  <div matLine>{{ makeup.category }}</div>
+</mat-list-item>
+<mat-divider></mat-divider>
