@@ -36,15 +36,16 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(): void {
     this.submitted = true;
-    console.log('Your form data : ', this.registerForm.value);
+    if (this.registerForm.invalid) {
+      return;
+    }
+    this.errorMessage = '';
     this.api.postTypeRequest('register', this.registerForm.value).subscribe((res: any) => {
       if (res.status) {
-        console.log(res);
         this.auth.setDataInLocalStorage('userData', JSON.stringify(res.data));
         this.auth.setDataInLocalStorage('token', res.token);
         this.router.navigate(['login']);
       } else {
-        console.log(res);
         alert(res.msg);
       }
     }, (err: { error: Error }) => {

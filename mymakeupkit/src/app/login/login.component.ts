@@ -49,8 +49,7 @@ export class LoginComponent implements OnInit {
   }
 
   isUserLogin(): void{
-    console.log(this.auth.getUserDetails());
-    if (this.auth.getUserDetails() != null){
+    if (this.auth.getUserDetails() !== null || this.auth.getAuthToken() !== null){
       this.isLogin = true;
     }
   }

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Makeup } from '../shared/makeup';
 import { MakeupStoreService } from '../shared/makeup-store.service';
 
@@ -12,7 +12,7 @@ export class MakeupListComponent {
 
   makeupItems: Makeup[] = []; 
 
-  constructor(private ms: MakeupStoreService, route: ActivatedRoute) {
+  constructor(private ms: MakeupStoreService, route: ActivatedRoute, private router: Router) {
     route.params.subscribe(() => {
       this.readAll();
     });
@@ -21,7 +21,11 @@ export class MakeupListComponent {
   readAll(): void {
     this.ms.getAll().subscribe(
       (response: Makeup[]) => this.makeupItems = response,
-      error => console.log(error)
+      response => {
+        if (response.status === 401) {
+          this.router.navigateByUrl('/login');
+        }
+      }
     );
   }
 

@@ -1,7 +1,8 @@
 <div class="ui menu">
   <a routerLink="home" routerLinkActive="active" class="item">Home</a>
-  <a routerLink="makeup" routerLinkActive="active" class="item">MakeUp</a>
-  <a routerLink="create" routerLinkActive="active" class="item">Add Item</a>
+  <a *ngIf="this.auth.getAuthToken()" routerLink="makeup" routerLinkActive="active" class="item ">MakeUp</a>
+  <a *ngIf="this.auth.getAuthToken()" routerLink="create" routerLinkActive="active" class="item">Add Item</a>
+  <a *ngIf="this.auth.getAuthToken()" routerLink="login" routerLinkActive="active" class="item">Logout</a>
 </div>
 
 <router-outlet></router-outlet>

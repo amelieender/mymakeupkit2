@@ -1,5 +1,6 @@
+import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
-import { Makeup } from './shared/makeup';
+import { AuthService } from './services/auth.service';
 
 type ViewState = 'list' | 'details';
 
@@ -8,18 +9,12 @@ type ViewState = 'list' | 'details';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  private isLoggedIn: boolean = false;
 
-  // title = 'mymakeupkit';
-  // makeup!: Makeup;
-  // viewState: ViewState = 'list';
+  constructor(private auth: AuthService) {}
 
-  // showList() {
-  //   this.viewState = 'list';
-  // }
-
-  // showDetails(makeup: Makeup) {
-  //   this.makeup = makeup;
-  //   this.viewState = 'details';
-  // }
+  ngOnInit() {
+    this.isLoggedIn = this.auth.getAuthToken() ? true : false;
+  }
 }
