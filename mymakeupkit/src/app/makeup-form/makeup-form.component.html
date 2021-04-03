@@ -1,52 +1,66 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <!-- <div class="form-group row">
-      <label for="staticId" class="col-sm-2 col-form-label">id</label>
-      <div class="col-sm-10">
-        <input type="number" class="form-control" formControlName="idControl" id="staticId" readonly>
-      </div>
-    </div> -->
-
     <div class="form-group row">
       <label for="inputProductname" class="col-sm-2 col-form-label">productname</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" formControlName="productnameControl" id="inputProductname">
+        <mat-form-field>
+          <input matInput type="text" class="form-control" formControlName="productnameControl" id="inputProductname">
+          <mat-error *ngIf="form.controls.productnameControl.errors">
+            Product name is required
+          </mat-error>
+        </mat-form-field>
       </div>
     </div>
 
     <div class="form-group row">
       <label for="inputBrandname" class="col-sm-2 col-form-label">brandname</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" formControlName="brandnameControl" id="inputBrandname">
+        <mat-form-field>
+          <input matInput type="text" class="form-control" formControlName="brandnameControl" id="inputBrandname">
+          <mat-error *ngIf="form.controls.brandnameControl.errors">
+            Brand name is required
+          </mat-error>
+        </mat-form-field>
       </div>
     </div>
 
     <div class="form-group row">
       <label for="inputCategory" class="col-sm-2 col-form-label">category</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" formControlName="categoryControl" id="inputCategory">
+      <mat-form-field>
+        <input matInput type="text" class="form-control" formControlName="categoryControl" id="inputCategory">
+        <mat-error *ngIf="form.controls.categoryControl.errors">
+          Category is required
+        </mat-error>
+      </mat-form-field>
       </div>
     </div>
 
     <div class="form-group row">
         <label for="inputOpened" class="col-sm-2 col-form-label">opened</label>
         <div class="col-sm-10">
-          <input type="date" class="form-control" formControlName="openedControl" id="inputOpened">
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" class="form-control" formControlName="openedControl" id="inputOpened">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
         </div>
       </div>
 
     <div class="form-group row">
         <label for="inputDurability" class="col-sm-2 col-form-label">durability</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" formControlName="durabilityControl" id="inputDurability">
+          <mat-form-field>
+            <input matInput type="text" class="form-control" formControlName="durabilityControl" id="inputDurability">
+          </mat-form-field>
         </div>
       </div>
 
     <div class="form-group row">
       <div class="col-sm-6">
-        <button type="submit" class="btn btn-primary btn-block" [disabled]="!form.valid">Update</button>
+        <button mat-button type="submit" class="btn btn-primary btn-block" [disabled]="!form.valid">Update</button>
       </div>
       <div class="col-sm-6">
-        <button type="cancel" class="btn btn-secondary btn-block" (click)="cancel()">Cancel</button>
+        <button mat-button type="cancel" class="btn btn-secondary btn-block" (click)="cancel()">Cancel</button>
       </div>
     </div>
   </form>

@@ -26,7 +26,7 @@ export class MakeupStoreService {
   }
 
   update(dataId: number, makeup: Makeup): void {
-    this.http.put<Makeup>(this.baseUrl + '/' + dataId, {...makeup, headers: { Authorization: this.getAuthHeader()}})
+    this.http.put<Makeup>(this.baseUrl + '/' + dataId, makeup, { headers: { Authorization: this.getAuthHeader()}})
       .subscribe(
         response => {
           console.log(response);
@@ -52,7 +52,7 @@ export class MakeupStoreService {
   }
 
   create(makeup: Makeup): void {
-    this.http.post<Makeup>(this.baseUrl, {...makeup, headers: { Authorization: this.getAuthHeader()}})
+    this.http.post<Makeup>(this.baseUrl, makeup, { headers: { Authorization: this.getAuthHeader() }})
       .subscribe(
         response => {
           console.log(response);

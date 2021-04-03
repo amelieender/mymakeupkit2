@@ -3,24 +3,30 @@
       <h4>Register</h4>
       <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" >
         <div class = 'form-group'>
-          <input class = 'form-control' type = "text" formControlName="username" name = "username" placeholder = "Username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
-          <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-            <div *ngIf="f.username.errors.required">Username is required</div>
-          </div>
+          <mat-form-field>
+            <input matInput class = 'form-control' type = "text" formControlName="username" name = "username" placeholder = "Username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+            <mat-error *ngIf="f.username.errors">
+              Username is required
+            </mat-error>
+          </mat-form-field>
         </div>
         <div class = 'form-group'>
-          <input class = 'form-control' type = "email" formControlName="email" name = "email" placeholder = "Email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-          <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-            <div *ngIf="f.email.errors.required">E-Mail is required</div>
-          </div>
+          <mat-form-field>
+            <input matInput class = 'form-control' type = "email" formControlName="email" name = "email" placeholder = "Email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+            <mat-error *ngIf="f.email.errors">
+              E-Mail is required
+            </mat-error>
+          </mat-form-field>
         </div>
         <div class = 'form-group'>
-          <input class = 'form-control' type = "password" formControlName="password" name = "password" placeholder = "Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-            <div *ngIf="f.password.errors.required">Password is required</div>
-          </div>
+          <mat-form-field>
+            <input matInput class = 'form-control' type = "password" formControlName="password" name = "password" placeholder = "Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+            <mat-error *ngIf="f.password.errors">
+              Password is required
+            </mat-error>
+          </mat-form-field>
         </div>
-        <input class= 'btn btn-outline-info' type = "submit" value = "Register">
+        <button mat-button class= 'btn btn-outline-info' type = "submit" value = "Register">Register</button>
         <div>{{ errorMessage }}</div>
       </form>
     </div>

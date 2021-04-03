@@ -14,6 +14,10 @@ export class AppComponent implements OnInit {
 
   constructor(private auth: AuthService) {}
 
+  get isLoggedInStatus() {
+    return this.auth.getAuthToken() ? true : false;
+  }
+
   ngOnInit() {
     this.isLoggedIn = this.auth.getAuthToken() ? true : false;
   }

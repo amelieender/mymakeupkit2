@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 import { Makeup } from '../shared/makeup';
 import { MakeupStoreService } from '../shared/makeup-store.service';
@@ -13,7 +14,7 @@ export class MakeupCreateComponent implements OnInit {
   makeup!: Makeup;
   createMode: boolean = false;
 
-  constructor(private ms: MakeupStoreService, public dialog: MatDialog) { }
+  constructor(private ms: MakeupStoreService, public dialog: MatDialog, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -24,9 +25,9 @@ export class MakeupCreateComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed', result);
       if (result) {
         this.ms.create(this.makeup);
+        this.router.navigateByUrl('/makeup');
       }
     });
   }
