@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { Makeup } from './makeup';
+import { AuthService } from '../services/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,18 +11,22 @@ import { Makeup } from './makeup';
 export class MakeupStoreService {
   baseUrl = 'http://localhost:3000/makeup';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private auth: AuthService) {}
+
+  private getAuthHeader(): string {
+    return `Bearer ${this.auth.getAuthToken()}`;
+  }
 
   getAll(): Observable<Makeup[]> {
-    return this.http.get<Makeup[]>(this.baseUrl);
+    return this.http.get<Makeup[]>(this.baseUrl, {headers: { Authorization: this.getAuthHeader() }});
   }
 
   getSingle(id: number): Observable<Makeup> {
-    return this.http.get<Makeup>(`${this.baseUrl}/${id}`);
+    return this.http.get<Makeup>(`${this.baseUrl}/${id}`, { headers: { Authorization: this.getAuthHeader() }});
   }
 
   update(dataId: number, makeup: Makeup): void {
-    this.http.put<Makeup>(this.baseUrl + '/' + dataId, makeup)
+    this.http.put<Makeup>(this.baseUrl + '/' + dataId, {...makeup, headers: { Authorization: this.getAuthHeader()}})
       .subscribe(
         response => {
           console.log(response);
@@ -34,7 +39,7 @@ export class MakeupStoreService {
   }
 
   deleteOne(dataId: number): void {
-    this.http.delete<Makeup>(this.baseUrl + '/' + dataId)
+    this.http.delete<Makeup>(this.baseUrl + '/' + dataId, { headers: { Authorization: this.getAuthHeader() }})
       .subscribe(
         response => {
           console.log(response);
@@ -47,7 +52,7 @@ export class MakeupStoreService {
   }
 
   create(makeup: Makeup): void {
-    this.http.post<Makeup>(this.baseUrl, makeup)
+    this.http.post<Makeup>(this.baseUrl, {...makeup, headers: { Authorization: this.getAuthHeader()}})
       .subscribe(
         response => {
           console.log(response);

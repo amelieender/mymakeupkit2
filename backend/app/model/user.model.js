@@ -1,6 +1,8 @@
 const { sha256 } = require('js-sha256');
 const jwt = require('jsonwebtoken');
+
 const con = require('./db.js');
+const jwtSigningSecret = require('../../config/jwt-secret');
 
 // constructor
 const User = function(user) {
@@ -23,7 +25,7 @@ User.register = (user, res) => {
                         if (err) {
                             res(err, null);
                         } else{
-                            let token = jwt.sign({ data: result }, 'secret')
+                            let token = jwt.sign({ data: result }, jwtSigningSecret);
                             res(null, { status: 1, data: result, token : token });
                         }
                     })
@@ -47,7 +49,7 @@ User.login = (user, res) => {
                 if (err) { 
                     res(err, null);
                 } else {
-                    let token = jwt.sign({ data: result }, 'secret')
+                    let token = jwt.sign({ data: result }, jwtSigningSecret);
                     res(null, { status: 1, data: result, token: token });
                 }
             })

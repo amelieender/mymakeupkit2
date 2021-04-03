@@ -1,21 +1,37 @@
+const jwt = require('express-jwt');
+const express = require('express');
+const router = express.Router();
+
+const jwtSigningSecret = require('../../config/jwt-secret');
+
 module.exports = app => {
     const makeup = require("../controller/makeup.controller.js");
 
+    router.use(jwt({ secret: jwtSigningSecret, algorithms: ['HS256'] }), (err, req, res, next) => {
+        if (err.name === 'UnauthorizedError') {
+            res.status(401).send('invalid token...');
+        } else {
+            next();
+        }
+    })
+
     // Create a new Member
-    app.post("/makeup", makeup.create);
+    router.post("/", makeup.create);
 
     // GET all makeup
-    app.get("/makeup", makeup.findAll);
+    router.get("/", makeup.findAll);
 
     // GET one single Member with memberId
-    app.get("/makeup/:id", makeup.findOne);
+    router.get("/:id", makeup.findOne);
 
     // Update one Member with memberId
-    app.put("/makeup/:id", makeup.update);
+    router.put("/:id", makeup.update);
 
     // Delete the Member with memberId
-    app.delete("/makeup/:id", makeup.delete);
+    router.delete("/:id", makeup.delete);
 
     // Delete all makeup
-    app.delete("/makeup", makeup.deleteAll);
+    router.delete("/", makeup.deleteAll);
+
+    app.use('/makeup', router);
 };
