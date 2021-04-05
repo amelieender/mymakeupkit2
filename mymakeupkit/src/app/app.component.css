@@ -1,15 +1,17 @@
 #app {
-    width: 1000px;
-    margin: 0 auto;
+  width: 1000px;
+  height: 100%;
+  margin: 0 auto;
+  background-color: rgb(250, 245, 242);
 }
 
 .main-content {
-    position: relative;
-    padding-top: 30px;
-    width: 95%;
-    margin: 0 auto;
+  position: relative;
+  padding-top: 30px;
+  width: 95%;
+  margin: 0 auto;
 }
 
 .item {
-    color: white;
+  color: white;
 }
