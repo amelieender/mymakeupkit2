@@ -10,7 +10,9 @@ import { MakeupStoreService } from '../shared/makeup-store.service';
 })
 export class MakeupListComponent {
 
-  makeupItems: Makeup[] = []; 
+  makeupItems: Makeup[] = [];
+  filteredMakeupItems: Makeup[] = [];
+  searchInput: string = '';
 
   constructor(private ms: MakeupStoreService, route: ActivatedRoute, private router: Router) {
     route.params.subscribe(() => {
@@ -20,7 +22,10 @@ export class MakeupListComponent {
 
   readAll(): void {
     this.ms.getAll().subscribe(
-      (response: Makeup[]) => this.makeupItems = response,
+      (response: Makeup[]) => {
+        this.makeupItems = response;
+        this.updateFilteredMakeupItems();
+      },
       response => {
         if (response.status === 401) {
           this.router.navigateByUrl('/login');
@@ -29,4 +34,27 @@ export class MakeupListComponent {
     );
   }
 
+  handleSearchInputChangeEvent(event: any) {
+    this.searchInput = event.target.value;
+    this.updateFilteredMakeupItems();
+  }
+
+  updateFilteredMakeupItems(): void {
+    this.filteredMakeupItems = this.makeupItems.filter(item => {
+      const lowerCaseSearch = this.searchInput.toLowerCase();
+      if (lowerCaseSearch.length === 0) {
+        return true;
+      }
+      if (item.brandname.toLowerCase().includes(lowerCaseSearch)) {
+        return true;
+      }
+      if (item.productname.toLowerCase().includes(lowerCaseSearch)) {
+        return true;
+      }
+      if (item.category.toLowerCase().includes(lowerCaseSearch)) {
+        return true;
+      }
+      return false;
+    });
+  }
 }

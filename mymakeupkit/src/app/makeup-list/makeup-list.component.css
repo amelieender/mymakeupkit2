@@ -1,3 +1,16 @@
+.search-bar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 200px;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+.makeup-list {
+    margin-top: 20px;
+}
+
 .makeup-list > .add-icon {
     margin-left: 50%;
     transform: translateX(-50%);

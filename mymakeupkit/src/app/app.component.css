@@ -4,6 +4,7 @@
 }
 
 .main-content {
+    position: relative;
     padding-top: 30px;
     width: 95%;
     margin: 0 auto;

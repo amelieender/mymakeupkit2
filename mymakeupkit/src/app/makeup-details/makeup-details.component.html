@@ -1,23 +1,23 @@
 <div *ngIf="makeup">
     <h1>{{ makeup.productname }}</h1>
-    <div class="ui divider"></div>
-    <div class="ui grid">
-    <div class="four wide column">
-        <h4>Brand</h4>
-        {{ makeup.brandname }}
-      </div>
-      <div class="four wide column">
-        <h4>Category</h4>
-        {{ makeup.category }}
-      </div>
-      <div class="four wide column">
-        <h4>Opened</h4>
-        {{ openedDisplayString }}
-      </div>
-      <div class="four wide column">
-        <h4>Durability</h4>
-          {{ getDurabilityString() }}
-      </div>
+    <mat-divider></mat-divider>
+    <div class="details-container">
+      <div class="details-item">
+          <h4>Brand</h4>
+          {{ makeup.brandname }}
+        </div>
+        <div class="details-item">
+          <h4>Category</h4>
+          {{ makeup.category }}
+        </div>
+        <div class="details-item">
+          <h4>Opened</h4>
+          {{ openedDisplayString }}
+        </div>
+        <div class="details-item">
+          <h4>Durability</h4>
+            {{ getDurabilityString() }}
+        </div>
     </div>
     <div class="buttons">
       <button mat-raised-button color="primary" (click)="toggleEditMode(true)">

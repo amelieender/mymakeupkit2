@@ -9,3 +9,11 @@
 h4 {
     font-weight: 500;
 }
+
+.details-container {
+    display: flex;
+}
+
+.details-item {
+    width: 100%;
+}
