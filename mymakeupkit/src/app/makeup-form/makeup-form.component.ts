@@ -10,6 +10,7 @@ import { Makeup } from 'src/app/shared/makeup';
 })
 export class MakeupFormComponent implements OnInit {
   @Input() makeup!: Makeup;
+  @Input() submitLabel: string = 'Submit';
   @Output() updateEvent = new EventEmitter<Makeup>();
   form: FormGroup;
 

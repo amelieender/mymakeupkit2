@@ -1,0 +1,13 @@
+.makeup-form {
+    border: #673ab7 2px solid;
+    padding: 10px;
+    margin-top: 30px;
+}
+
+.makeup-form-buttons {
+    display: flex;
+}
+
+.col-form-label {
+    font-weight: 500;
+}

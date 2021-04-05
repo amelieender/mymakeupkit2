@@ -16,7 +16,7 @@
       </div>
       <div class="four wide column">
         <h4>Durability</h4>
-          {{ makeup.durability }}  months
+          {{ getDurabilityString() }}
       </div>
     </div>
     <div class="buttons">
@@ -27,5 +27,5 @@
         Delete
       </button>
     </div>
-    <ae-makeup-form [makeup]="makeup" *ngIf="editMode" (updateEvent)="update($event)"></ae-makeup-form>
+    <ae-makeup-form [makeup]="makeup" [submitLabel]="submitLabel" *ngIf="editMode" (updateEvent)="update($event)"></ae-makeup-form>
 </div>

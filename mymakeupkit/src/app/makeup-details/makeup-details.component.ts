@@ -17,6 +17,7 @@ export interface DialogData {
 export class MakeupDetailsComponent implements OnInit {
   makeup: Makeup | undefined;
   editMode: boolean = false;
+  submitLabel: string = 'Update';
 
   constructor(private ms: MakeupStoreService, private route: ActivatedRoute, private router: Router, public dialog: MatDialog) {}
 
@@ -38,6 +39,10 @@ export class MakeupDetailsComponent implements OnInit {
       (response: Makeup) => this.makeup = response,
       error => console.log(error)
       );
+  }
+
+  getDurabilityString(): string {
+    return this.makeup?.durability ? `${this.makeup?.durability} months` : '';
   }
 
   toggleEditMode(toggle: boolean) {

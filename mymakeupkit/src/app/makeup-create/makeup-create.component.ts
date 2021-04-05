@@ -13,6 +13,7 @@ import { MakeupStoreService } from '../shared/makeup-store.service';
 export class MakeupCreateComponent implements OnInit {
   makeup!: Makeup;
   createMode: boolean = false;
+  submitLabel: string = 'Create';
 
   constructor(private ms: MakeupStoreService, public dialog: MatDialog, private router: Router) { }
 

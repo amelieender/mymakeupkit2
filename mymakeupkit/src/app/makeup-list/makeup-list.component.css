@@ -1,0 +1,8 @@
+.makeup-list > .add-icon {
+    margin-left: 50%;
+    transform: translateX(-50%);
+    margin-top: 20px;
+    font-size: 32px;
+    color: #673ab7;
+    cursor: pointer;
+}
