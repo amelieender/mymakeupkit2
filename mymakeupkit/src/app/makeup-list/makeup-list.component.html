@@ -1,4 +1,4 @@
-<input class="search-bar" matInput type="text" placeholder="Search" (keydown)="handleSearchInputChangeEvent($event)">
+<input class="search-bar" matInput type="text" placeholder="Search" (input)="handleSearchInputChangeEvent($event)">
 <mat-list class="makeup-list">
   <ae-makeup-item class="item"
     *ngFor="let makeup of filteredMakeupItems" 
