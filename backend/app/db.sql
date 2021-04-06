@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 03, 2021 at 02:36 PM
+-- Generation Time: Apr 06, 2021 at 11:30 AM
 -- Server version: 8.0.23-0ubuntu0.20.04.1
 -- PHP Version: 7.4.3
 
@@ -42,9 +42,13 @@ CREATE TABLE `makeupItems` (
 --
 
 INSERT INTO `makeupItems` (`id`, `productname`, `brandname`, `category`, `opened`, `durability`) VALUES
-(1, 'Russian Red', 'MAC', 'Lipstick', '2021-04-01', 3),
-(2, 'Löscher', 'L\'oreal', 'Concealer', NULL, 2),
-(3, 'Russian Red', 'MAC', 'Lipstick', '2021-04-07', 10);
+(1, 'Russian Red', 'MAC', 'Lipstick', '2021-04-01', 12),
+(2, 'Löscher', 'L\'oreal', 'Concealer', NULL, 24),
+(22, 'Meet me at Sunset', 'Essie', 'Nailpolish', '2021-02-17', 24),
+(23, 'Mademoiselle', 'Chanel', 'Lipstick', '2021-04-05', 12),
+(24, 'Cranberry', 'MAC', 'Eyeshadow', NULL, NULL),
+(25, 'Hoola Matte', 'Benefit', 'Bronzer', NULL, NULL),
+(27, 'Perfect Match', 'L\'oreal', 'Foundation', '2021-01-12', 6);
 
 -- --------------------------------------------------------
 
@@ -65,8 +69,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`) VALUES
 (1, 'amelie', 'amelie@email.de', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92'),
-(2, 'amelie1', 'amelie1@email.de', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92'),
-(3, 'pedro', 'pedro@mail.com', 'd3751d33f9cd5049c4af2b462735457e4d3baf130bcbb87f389e349fbaeb20b9');
+(2, 'amelie1', 'amelie1@email.de', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92');
 
 --
 -- Indexes for dumped tables
@@ -94,13 +97,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `makeupItems`
 --
 ALTER TABLE `makeupItems`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
