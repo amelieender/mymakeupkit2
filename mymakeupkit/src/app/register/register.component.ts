@@ -44,7 +44,7 @@ export class RegisterComponent implements OnInit {
       if (res.status) {
         this.auth.setDataInLocalStorage('userData', JSON.stringify(res.data));
         this.auth.setDataInLocalStorage('token', res.token);
-        this.router.navigate(['login']);
+        this.router.navigate(['makeup']);
       } else {
         alert(res.msg);
       }

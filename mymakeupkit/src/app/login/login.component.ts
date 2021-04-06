@@ -36,12 +36,14 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     this.submitted = true;
     this.api.postTypeRequest('login', this.loginForm.value).subscribe((res: any) => {
-      if (res.status) {
+      console.log(res)
+      if (res.status === 200) {
         console.log(res);
         this.auth.setDataInLocalStorage('userData', JSON.stringify(res.data));
         this.auth.setDataInLocalStorage('token', res.token);
         this.router.navigate(['']);
       } else {
+        // this.errorMessage = err.error.message;
       }
     }, (err: { error: { message: any; }; }) => {
       this.errorMessage = err.error.message;
