@@ -45,12 +45,16 @@ User.login = (user, res) => {
         const sql = `SELECT * FROM users WHERE username = ? AND password = ?`
         con.query(
             sql, [username, hashed_password],
-            function(err, result){
-                if (err) { 
+            function(err, result) {
+                if (err) {
                     res(err, null);
                 } else {
+                    if (!result.length) {
+                        res(Error('Username or password wrong!'), null);
+                        return;
+                    }
                     let token = jwt.sign({ data: result }, jwtSigningSecret);
-                    res(null, { status: 1, data: result, token: token });
+                    res(null, { status: 200, data: result, token: token });
                 }
             })
     } catch (error) {

@@ -6,6 +6,7 @@ exports.register = (req, res) => {
         res.status(400).send({
             message: "Content can not be empty!"
         });
+        return;
     }
 
     // Create a Member
@@ -17,19 +18,23 @@ exports.register = (req, res) => {
 
     // Save Customer in the database
     User.register(user, (err, data) => {
-        if (err)
+        if (err){
             res.status(500).send({
                 message:
                     err.message || "Some error occurred while creating the User."
             });
-        else res.send(data);
+            return;
+        }
+        else {res.send(data);
+        }
+        return;
     });
 };
 
 exports.login = (req, res) => {
     // Validate request
     if (!req.body) {
-        res.status(400).send({
+        return res.status(400).send({
             message: "Content can not be empty!"
         });
     }
@@ -41,11 +46,14 @@ exports.login = (req, res) => {
     });
 
     User.login(user, (err, data) => {
-        if (err)
-            res.status(500).send({
+        if (err) {
+            return res.status(500).send({
                 message:
                     err.message || "Some error occurred during login."
             });
-        else res.send(data);
+        }
+        else {
+            return res.status(200).send(data);
+        }
     });
 };
