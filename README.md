@@ -10,7 +10,7 @@
 * Delete a makeup item 
 * Search for items
 
-## To run this apllication locally
+## To run this application locally
 
 ### Setup DB
 You need a config file (backend/config/db.config.js) with the following information
