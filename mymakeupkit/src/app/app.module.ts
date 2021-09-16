@@ -26,6 +26,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle'; 
+import {MatCardModule} from '@angular/material/card'; 
 
 @NgModule({
   declarations: [
@@ -54,6 +56,8 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     MatListModule,
     MatDividerModule,
     MatIconModule,
+    MatSlideToggleModule,
+    MatCardModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable

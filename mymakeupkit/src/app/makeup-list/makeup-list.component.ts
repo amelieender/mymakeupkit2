@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Makeup } from '../shared/makeup';
 import { MakeupStoreService } from '../shared/makeup-store.service';
+import { HostListener } from '@angular/core';
 
 @Component({
   selector: 'ae-makeup-list',
@@ -13,6 +14,7 @@ export class MakeupListComponent {
   makeupItems: Makeup[] = [];
   filteredMakeupItems: Makeup[] = [];
   searchInput: string = '';
+  deferredPrompt: any;
 
   constructor(private ms: MakeupStoreService, route: ActivatedRoute, private router: Router) {
     route.params.subscribe(() => {
@@ -56,5 +58,30 @@ export class MakeupListComponent {
       }
       return false;
     });
+  }
+
+  @HostListener('window:beforeinstallprompt', ['$event'])
+  onbeforeinstallprompt(e: { preventDefault: () => void; }) {
+    console.log(e);
+    // Prevent Chrome 67 and earlier from automatically showing the prompt
+    e.preventDefault();
+    // Stash the event so it can be triggered later.
+    this.deferredPrompt = e;
+  }
+
+
+  showInstall() {
+    // Show the prompt
+    this.deferredPrompt.prompt();
+    // Wait for the user to respond to the prompt
+    this.deferredPrompt.userChoice
+      .then((choiceResult: { outcome: string; }) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('User accepted the A2HS prompt');
+        } else {
+          console.log('User dismissed the A2HS prompt');
+        }
+        this.deferredPrompt = null;
+      });
   }
 }

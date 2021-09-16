@@ -1,6 +1,17 @@
-<mat-list-item class="makeup-item">
+<!-- <mat-list-item class="makeup-item">
   <h3 matLine>{{ makeup.productname }}</h3>
   <h5 matLine>{{ makeup.brandname }}</h5>
   <div matLine>{{ makeup.category }}</div>
-</mat-list-item>
+</mat-list-item> -->
+
+
+<mat-card class="makeup-card" >
+  <mat-card-header>
+    <mat-card-title>{{makeup.productname}}</mat-card-title>
+    <mat-card-subtitle>{{ makeup.brandname }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>{{makeup.category}}</mat-card-content>
+</mat-card>
+
 <mat-divider></mat-divider>
+

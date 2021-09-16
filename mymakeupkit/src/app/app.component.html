@@ -12,6 +12,9 @@
     <a *ngIf="isLoggedInStatus" routerLink="login" routerLinkActive="active" class="item">
       <button mat-button>Logout</button>
     </a>
+    <a *ngIf="isLoggedInStatus" routerLink="" routerLinkActive="active" class="item">
+      <mat-slide-toggle>Notifications</mat-slide-toggle>
+    </a>
   </mat-toolbar>
   
   <div class="main-content">

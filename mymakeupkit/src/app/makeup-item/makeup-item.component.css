@@ -3,3 +3,8 @@
     cursor: pointer;
     transition: 0.3s;
 }
+
+.makeup-card {
+    max-width: 400px;
+  }
+  
