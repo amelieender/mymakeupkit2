@@ -1,18 +1,20 @@
-.search-bar {
-    position: relative;
-    top: 0;
-    right: 0;
-    width: 200px;
-    margin-top: 20px;
+.search {
+  float: right;
+  position: relative;
+  margin: 20px;
+  display: flex;
 }
 
 .makeup-list {
-    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
-.makeup-list > .add-icon {
-    margin-left: 50%;
-    transform: translateX(-50%);
-    margin-top: 20px;
-    cursor: pointer;
+.add-icon {
+  margin-left: 50%;
+  transform: translateX(-50%);
+  margin-top: 20px;
+  cursor: pointer;
 }

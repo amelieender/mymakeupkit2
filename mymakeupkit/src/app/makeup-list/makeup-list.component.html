@@ -1,9 +1,8 @@
-<input matInput class="search-bar" type="text" placeholder="Search" (input)="handleSearchInputChangeEvent($event)">
-<mat-list class="makeup-list">
+<div class="makeup-list">
   <ae-makeup-item class="item"
     *ngFor="let makeup of filteredMakeupItems" 
     [makeup]="makeup"
     [routerLink]="makeup.id.toString()">
   </ae-makeup-item>
   <button mat-fab color="primary" class="add-icon" routerLink="/create" (click)="showInstall()"> <mat-icon>add_circle_outline</mat-icon></button>
-</mat-list>
+</div>

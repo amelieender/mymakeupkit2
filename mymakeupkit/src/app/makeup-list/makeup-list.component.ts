@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Makeup } from '../shared/makeup';
 import { MakeupStoreService } from '../shared/makeup-store.service';
 import { HostListener } from '@angular/core';
+import { SearchbarService } from '../services/searchbar.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'ae-makeup-list',
@@ -14,12 +16,20 @@ export class MakeupListComponent {
   makeupItems: Makeup[] = [];
   filteredMakeupItems: Makeup[] = [];
   searchInput: string = '';
+  searchInput$: Observable<string> = this.searchbar.getSearchInput();
   deferredPrompt: any;
 
-  constructor(private ms: MakeupStoreService, route: ActivatedRoute, private router: Router) {
+  constructor(private ms: MakeupStoreService, route: ActivatedRoute, private router: Router, private searchbar: SearchbarService) {
     route.params.subscribe(() => {
       this.readAll();
     });
+  }
+
+  ngOnInit() {
+    this.searchInput$.subscribe((input: string) => {
+      this.searchInput = input;
+      this.updateFilteredMakeupItems();
+    })
   }
 
   readAll(): void {
@@ -34,11 +44,6 @@ export class MakeupListComponent {
         }
       }
     );
-  }
-
-  handleSearchInputChangeEvent(event: any) {
-    this.searchInput = event.target.value;
-    this.updateFilteredMakeupItems();
   }
 
   updateFilteredMakeupItems(): void {
