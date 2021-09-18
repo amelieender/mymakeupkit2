@@ -10,11 +10,16 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
+    row-gap: 15px;
 }
 
 .add-icon {
-  margin-left: 50%;
-  transform: translateX(-50%);
-  margin-top: 20px;
-  cursor: pointer;
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.add-icon:hover {
+    background-color: #bfaedc;
 }

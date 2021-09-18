@@ -5,6 +5,11 @@
 
 .makeup-card {
     cursor: pointer;
+    width: 300px;
     max-width: 400px;
     padding: 20px;
+}
+
+mat-card {
+    border-radius: 10px;
 }
