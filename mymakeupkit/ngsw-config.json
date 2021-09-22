@@ -26,5 +26,17 @@
         ]
       }
     }
+  ],
+  "dataGroups": [
+    {
+    "name": "recipesData",
+    "urls": ["http://localhost:3000/makeup"],
+    "cacheConfig":{
+      "maxAge": "6h",
+      "maxSize": 5,
+      "timeout": "10s",
+      "strategy": "freshness"
+    }
+    }
   ]
 }
