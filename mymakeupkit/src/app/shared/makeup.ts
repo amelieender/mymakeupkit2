@@ -4,5 +4,8 @@ export interface Makeup {
     brandname: string;
     category: string;
     opened?: string;
-    durability?: number
+    durability?: number;
+    image?: string;
+    latitude?: number;
+    longitude?: number;
 }

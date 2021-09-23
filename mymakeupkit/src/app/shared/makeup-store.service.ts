@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { Makeup } from './makeup';
 import { AuthService } from '../services/auth.service';
 
+import './dexie-db';
+
 @Injectable({
   providedIn: 'root'
 })
