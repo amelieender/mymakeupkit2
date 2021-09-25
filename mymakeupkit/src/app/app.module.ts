@@ -59,7 +59,7 @@ import {MatCardModule} from '@angular/material/card';
     MatIconModule,
     MatSlideToggleModule,
     MatCardModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {
+    ServiceWorkerModule.register('sw-sync.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
       // or after 30 seconds (whichever comes first).

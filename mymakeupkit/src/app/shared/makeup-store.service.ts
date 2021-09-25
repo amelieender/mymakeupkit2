@@ -5,9 +5,10 @@ import { Observable, ReplaySubject, Subject } from 'rxjs';
 import { Makeup } from './makeup';
 import { AuthService } from '../services/auth.service';
 import { deleteData, getData, getSingleData, updateData } from './dexie-db';
+import { writeData } from './dexie-sync-db';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MakeupStoreService {
   baseUrl = 'http://localhost:3000/makeup';
@@ -29,34 +30,38 @@ export class MakeupStoreService {
   }
 
   getAll(): Observable<Makeup[]> {
-    const response =  this.http.get<Makeup[]>(this.baseUrl, {headers: { Authorization: this.getAuthHeader() }});
+    const response = this.http.get<Makeup[]>(this.baseUrl, {
+      headers: { Authorization: this.getAuthHeader() },
+    });
     const observer$: Subject<Makeup[]> = new ReplaySubject<Makeup[]>(1);
     response.subscribe(
-      response => {
-        this.worker?.postMessage({name: 'addData', data: response});
+      (response) => {
+        this.worker?.postMessage({ name: 'addData', data: response });
         observer$.next(response);
       },
-      error => {
+      (error) => {
         // get from indexed db
         getData()
-          .then(data => observer$.next(data))
+          .then((data) => observer$.next(data))
           .catch(console.error);
       }
     );
     return observer$.asObservable();
   }
 
-  getSingle(id: number): Observable<Makeup> { 
-    const response = this.http.get<Makeup>(`${this.baseUrl}/${id}`, { headers: { Authorization: this.getAuthHeader() }});
+  getSingle(id: number): Observable<Makeup> {
+    const response = this.http.get<Makeup>(`${this.baseUrl}/${id}`, {
+      headers: { Authorization: this.getAuthHeader() },
+    });
     const observer$: Subject<Makeup> = new ReplaySubject<Makeup>(1);
     response.subscribe(
-      response => {
-        this.worker?.postMessage({name: 'addData', data: [response]});
+      (response) => {
+        this.worker?.postMessage({ name: 'addData', data: [response] });
         observer$.next(response);
       },
-      error => {
+      (error) => {
         getSingleData(Number(id))
-          .then(data => observer$.next(data))
+          .then((data) => observer$.next(data))
           .catch(console.error);
       }
     );
@@ -64,38 +69,58 @@ export class MakeupStoreService {
   }
 
   update(dataId: number, makeup: Makeup): void {
-    this.http.put<Makeup>(this.baseUrl + '/' + dataId, makeup, { headers: { Authorization: this.getAuthHeader()}})
+    this.http
+      .put<Makeup>(this.baseUrl + '/' + dataId, makeup, {
+        headers: { Authorization: this.getAuthHeader() },
+      })
       .subscribe(
-        response => {
-          this.worker?.postMessage({name: 'updateDataSingle', data: response})
+        (response) => {
+          this.worker?.postMessage({
+            name: 'updateDataSingle',
+            data: response,
+          });
         },
-        error => {
+        (error) => {
           console.log(error);
         }
       );
   }
 
   deleteOne(dataId: number): void {
-    this.http.delete<Makeup>(this.baseUrl + '/' + dataId, { headers: { Authorization: this.getAuthHeader() }})
+    this.http
+      .delete<Makeup>(this.baseUrl + '/' + dataId, {
+        headers: { Authorization: this.getAuthHeader() },
+      })
       .subscribe(
-        response => {
-          this.worker?.postMessage({name: 'deleteDataSingle', id: dataId})
+        (response) => {
+          this.worker?.postMessage({ name: 'deleteDataSingle', id: dataId });
         },
-        error => {
+        (error) => {
           console.log(error);
         }
       );
   }
 
   create(makeup: Makeup): void {
-    this.http.post<Makeup>(this.baseUrl, makeup, { headers: { Authorization: this.getAuthHeader() }})
-      .subscribe(
-        response => {
-          console.log(response);
-        },
-        error => {
-          console.log(error);
-        }
-      );
+    if ('serviceWorker' in navigator && 'SyncManager' in window) {
+      writeData({ ...makeup, id: new Date().getTime()}).then(() => {
+        navigator.serviceWorker.ready.then((sw) => {
+          sw.sync.register('sync-new-post');
+        });
+      });
+    } else {
+      this.http
+        .post<Makeup>(this.baseUrl, makeup, {
+          headers: { Authorization: this.getAuthHeader() },
+        })
+        .subscribe(
+          (response) => {
+            console.log(response);
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+    }
   }
 }

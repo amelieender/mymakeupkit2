@@ -23,6 +23,7 @@ export class MakeupDB extends Dexie {
 const idb = new MakeupDB();
 
 idb.open().catch(err => {
+    idb.makeup.clear();
     console.error(`Opened failed: ${err.stack}`);
 });
 

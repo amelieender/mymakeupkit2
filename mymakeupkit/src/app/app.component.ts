@@ -16,11 +16,12 @@ export class AppComponent implements OnInit {
   constructor(private auth: AuthService, private searchbar: SearchbarService) {}
 
   get isLoggedInStatus() {
-    return this.auth.getAuthToken() ? true : false;
+    return this.isLoggedIn;
   }
 
   ngOnInit() {
     this.isLoggedIn = this.auth.getAuthToken() ? true : false;
+    this.auth.getAuthStatus().subscribe(status => this.isLoggedIn = status);
   }
 
   handleSearchInputChangeEvent(event: any) {

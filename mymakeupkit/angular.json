@@ -26,7 +26,17 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/manifest.webmanifest"
+              "src/manifest.webmanifest",
+              {
+                "glob": "dexie.min.js",
+                "input": "node_modules/dexie/dist/",
+                "output": "./"
+              },
+              {
+                "glob": "sw-sync.js",
+                "input": "src/app/",
+                "output": "./"
+              }
             ],
             "styles": [
               "src/styles.css",

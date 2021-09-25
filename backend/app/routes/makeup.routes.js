@@ -7,13 +7,13 @@ const jwtSigningSecret = require('../../config/jwt-secret');
 module.exports = app => {
     const makeup = require("../controller/makeup.controller.js");
 
-    router.use(jwt({ secret: jwtSigningSecret, algorithms: ['HS256'] }), (err, req, res, next) => {
-        if (err.name === 'UnauthorizedError') {
-            res.status(401).send('invalid token...');
-        } else {
-            next();
-        }
-    })
+    // router.use(jwt({ secret: jwtSigningSecret, algorithms: ['HS256'] }), (err, req, res, next) => {
+    //     if (err.name === 'UnauthorizedError') {
+    //         res.status(401).send('invalid token...');
+    //     } else {
+    //         next();
+    //     }
+    // })
 
     // Create a new Member
     router.post("/", makeup.create);
