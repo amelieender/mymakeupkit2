@@ -7,6 +7,9 @@ const MakeupItem = function(item) {
     this.category = item.category;
     this.opened = item.opened;
     this.durability = item.durability;
+    this.image = item.image;
+    this.latitude = item.latitude;
+    this.longitude = item.longitude;
 };
 
 const tableName = 'makeupItems';
@@ -58,8 +61,9 @@ MakeupItem.getAll = result => {
 
 MakeupItem.updateById = (id, item, result) => {
     sql.query(
-        `UPDATE ${tableName} SET productname = ?, brandname = ?, category = ?, opened = ?, durability = ? WHERE id = ?`,
-        [item.productname, item.brandname, item.category, item.opened, item.durability, id],
+        `UPDATE ${tableName} SET productname = ?, brandname = ?, category = ?, opened = ?, durability = ?, image = ?,
+        latitude = ?, longitude = ? WHERE id = ?`,
+        [item.productname, item.brandname, item.category, item.opened, item.durability, item.image, item.latitude, item.longitude, id],
         (err, res) => {
             if (err) {
                 console.log("error: ", err);

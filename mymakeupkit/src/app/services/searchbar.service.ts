@@ -6,7 +6,7 @@ import { Observable, ReplaySubject, Subject } from 'rxjs';
 })
 export class SearchbarService {
 
-  public searchInput$: Subject<string> = new ReplaySubject<string>(1);;
+  public searchInput$: Subject<string> = new ReplaySubject<string>(1);
   constructor() { }
 
   setSearchInput(input: string) {

@@ -29,6 +29,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle'; 
 import {MatCardModule} from '@angular/material/card'; 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +40,7 @@ import {MatCardModule} from '@angular/material/card';
     MakeupFormComponent,
     MakeupCreateComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,38 +1,73 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, ReplaySubject, Subject } from 'rxjs';
 
 import { Makeup } from './makeup';
 import { AuthService } from '../services/auth.service';
-
-import './dexie-db';
+import { deleteData, getData, getSingleData, updateData } from './dexie-db';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MakeupStoreService {
   baseUrl = 'http://localhost:3000/makeup';
+  worker: Worker | undefined;
 
-  constructor(private http: HttpClient, private auth: AuthService) {}
+  constructor(private http: HttpClient, private auth: AuthService) {
+    if (typeof Worker !== 'undefined') {
+      // Create a new
+      this.worker = new Worker('../app.worker', { type: 'module' });
+    } else {
+      // Web Workers are not supported in this environment.
+      // You should add a fallback so that your program still executes correctly.
+      console.warn('worker not supported');
+    }
+  }
 
   private getAuthHeader(): string {
     return `Bearer ${this.auth.getAuthToken()}`;
   }
 
   getAll(): Observable<Makeup[]> {
-    return this.http.get<Makeup[]>(this.baseUrl, {headers: { Authorization: this.getAuthHeader() }});
+    const response =  this.http.get<Makeup[]>(this.baseUrl, {headers: { Authorization: this.getAuthHeader() }});
+    const observer$: Subject<Makeup[]> = new ReplaySubject<Makeup[]>(1);
+    response.subscribe(
+      response => {
+        this.worker?.postMessage({name: 'addData', data: response});
+        observer$.next(response);
+      },
+      error => {
+        // get from indexed db
+        getData()
+          .then(data => observer$.next(data))
+          .catch(console.error);
+      }
+    );
+    return observer$.asObservable();
   }
 
-  getSingle(id: number): Observable<Makeup> {
-    return this.http.get<Makeup>(`${this.baseUrl}/${id}`, { headers: { Authorization: this.getAuthHeader() }});
+  getSingle(id: number): Observable<Makeup> { 
+    const response = this.http.get<Makeup>(`${this.baseUrl}/${id}`, { headers: { Authorization: this.getAuthHeader() }});
+    const observer$: Subject<Makeup> = new ReplaySubject<Makeup>(1);
+    response.subscribe(
+      response => {
+        this.worker?.postMessage({name: 'addData', data: [response]});
+        observer$.next(response);
+      },
+      error => {
+        getSingleData(Number(id))
+          .then(data => observer$.next(data))
+          .catch(console.error);
+      }
+    );
+    return observer$.asObservable();
   }
 
   update(dataId: number, makeup: Makeup): void {
     this.http.put<Makeup>(this.baseUrl + '/' + dataId, makeup, { headers: { Authorization: this.getAuthHeader()}})
       .subscribe(
         response => {
-          console.log(response);
-          console.log(response.id);
+          this.worker?.postMessage({name: 'updateDataSingle', data: response})
         },
         error => {
           console.log(error);
@@ -44,8 +79,7 @@ export class MakeupStoreService {
     this.http.delete<Makeup>(this.baseUrl + '/' + dataId, { headers: { Authorization: this.getAuthHeader() }})
       .subscribe(
         response => {
-          console.log(response);
-          console.log(response.id);
+          this.worker?.postMessage({name: 'deleteDataSingle', id: dataId})
         },
         error => {
           console.log(error);

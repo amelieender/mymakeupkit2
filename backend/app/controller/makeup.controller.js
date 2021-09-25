@@ -15,7 +15,10 @@ exports.create = (req, res) => {
         brandname: req.body.brandname,
         category: req.body.category,
         opened: req.body.opened,
-        durability: req.body.durability
+        durability: req.body.durability,
+        image: req.body.image,
+        latitude: req.body.latitude,
+        longitude: req.body.longitude
     });
 
     // Save Customer in the database
