@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, ReplaySubject, Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 import { Makeup } from './makeup';
 import { AuthService } from '../services/auth.service';
 import { deleteData, getData, getSingleData, updateData } from './dexie-db';
 import { writeData } from './dexie-sync-db';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -33,19 +34,33 @@ export class MakeupStoreService {
     const response = this.http.get<Makeup[]>(this.baseUrl, {
       headers: { Authorization: this.getAuthHeader() },
     });
-    const observer$: Subject<Makeup[]> = new ReplaySubject<Makeup[]>(1);
-    response.subscribe(
-      (response) => {
-        this.worker?.postMessage({ name: 'addData', data: response });
-        observer$.next(response);
-      },
-      (error) => {
-        // get from indexed db
-        getData()
-          .then((data) => observer$.next(data))
-          .catch(console.error);
-      }
-    );
+    const observer$: Subject<Makeup[]> = new Subject<Makeup[]>();
+    response
+      .pipe(
+        map((makeupList: Array<any>): Makeup[] => {
+          for (const makeup of makeupList) {
+            let b64encoded = '';
+            if (makeup.image) {
+              const u8 = new Uint8Array(makeup.image.data);
+              b64encoded = new TextDecoder().decode(u8);
+            }
+            makeup.image = b64encoded;
+          }
+          return makeupList;
+        })
+      )
+      .subscribe(
+        (response) => {
+          this.worker?.postMessage({ name: 'addData', data: response });
+          observer$.next(response);
+        },
+        (error) => {
+          // get from indexed db
+          getData()
+            .then((data) => observer$.next(data))
+            .catch(console.error);
+        }
+      );
     return observer$.asObservable();
   }
 
@@ -53,18 +68,30 @@ export class MakeupStoreService {
     const response = this.http.get<Makeup>(`${this.baseUrl}/${id}`, {
       headers: { Authorization: this.getAuthHeader() },
     });
-    const observer$: Subject<Makeup> = new ReplaySubject<Makeup>(1);
-    response.subscribe(
-      (response) => {
-        this.worker?.postMessage({ name: 'addData', data: [response] });
-        observer$.next(response);
-      },
-      (error) => {
-        getSingleData(Number(id))
-          .then((data) => observer$.next(data))
-          .catch(console.error);
-      }
-    );
+    const observer$: Subject<Makeup> = new Subject<Makeup>();
+    response
+      .pipe(
+        map((makeup: any): Makeup => {
+          let b64encoded = '';
+          if (makeup.image) {
+            const u8 = new Uint8Array(makeup.image.data);
+            b64encoded = new TextDecoder().decode(u8);
+          }
+          makeup.image = b64encoded;
+          return makeup;
+        })
+      )
+      .subscribe(
+        (response) => {
+          this.worker?.postMessage({ name: 'addData', data: [response] });
+          observer$.next(response);
+        },
+        (error) => {
+          getSingleData(Number(id))
+            .then((data) => observer$.next(data))
+            .catch(console.error);
+        }
+      );
     return observer$.asObservable();
   }
 
@@ -103,7 +130,7 @@ export class MakeupStoreService {
 
   create(makeup: Makeup): void {
     if ('serviceWorker' in navigator && 'SyncManager' in window) {
-      writeData({ ...makeup, id: new Date().getTime()}).then(() => {
+      writeData({ ...makeup, id: new Date().getTime() }).then(() => {
         navigator.serviceWorker.ready.then((sw) => {
           sw.sync.register('sync-new-post');
         });

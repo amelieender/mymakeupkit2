@@ -26,6 +26,7 @@ export class MakeupListComponent {
   }
 
   ngOnInit() {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.searchInput$.subscribe((input: string) => {
       this.searchInput = input;
       this.updateFilteredMakeupItems();

@@ -27,8 +27,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle'; 
-import {MatCardModule} from '@angular/material/card'; 
-
+import {MatCardModule} from '@angular/material/card';
+import {WebcamModule} from 'ngx-webcam';
 
 @NgModule({
   declarations: [
@@ -64,7 +64,8 @@ import {MatCardModule} from '@angular/material/card';
       // Register the ServiceWorker as soon as the app is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
-    })
+    }),
+    WebcamModule
   ],
   providers: [
     {provide : LocationStrategy , useClass: HashLocationStrategy}

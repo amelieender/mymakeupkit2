@@ -5,13 +5,13 @@ const bodyParser = require("body-parser");
 const app = express();
 
 // parse requests of content-type: application/json
-app.use(bodyParser.json());
+app.use(express.json({ limit: '25mb'}));
 
 // enable cors for all requests
 app.use(cors());
 
 // parse requests of content-type: application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true, limit: '25mb' }));
 
 // simple route
 app.get("/", (req, res) => {
