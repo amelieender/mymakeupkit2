@@ -2,16 +2,16 @@
   <mat-toolbar color="primary" class="toolbar">
     <img src="/assets/icons/kiss72.png" alt="mymakeupkitlogo">
     <div class="navigation">
-      <a routerLink="home" routerLinkActive="active" class="item">
+      <a routerLink="/home" routerLinkActive="active" class="item">
         <button mat-button>Home</button>
       </a>
-      <a *ngIf="isLoggedInStatus" routerLink="makeup" routerLinkActive="active" class="item ">
+      <a *ngIf="isLoggedInStatus" routerLink="/makeup" routerLinkActive="active" class="item">
         <button mat-button>MakeUp</button>
       </a>
-      <a *ngIf="isLoggedInStatus" routerLink="create" routerLinkActive="active" class="item">
+      <a *ngIf="isLoggedInStatus" routerLink="/create" routerLinkActive="active" class="item">
         <button mat-button>Add Item</button>
       </a>
-      <a *ngIf="isLoggedInStatus" routerLink="login" routerLinkActive="active" class="item">
+      <a *ngIf="isLoggedInStatus" routerLink="/login" routerLinkActive="active" class="item">
         <button mat-button>Logout</button>
       </a>
     </div>
