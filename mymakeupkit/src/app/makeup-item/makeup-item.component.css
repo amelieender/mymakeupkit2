@@ -13,3 +13,7 @@
 mat-card {
     border-radius: 10px;
 }
+
+img {
+    max-height: 250px;
+}

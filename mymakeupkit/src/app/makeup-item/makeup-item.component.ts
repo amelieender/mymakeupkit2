@@ -8,10 +8,18 @@ import { Makeup } from '../shared/makeup';
 })
 export class MakeupItemComponent implements OnInit {
   @Input() makeup!: Makeup;
+  imageSourceString: string = '/assets/makeup2.jpg';
 
   constructor() { }
 
   ngOnInit(): void {
+    if (this.makeup?.image) {
+      this.imageSourceString = `data:image/jpeg;base64,${this.makeup.image}`;
+    }
+  }
+
+  get imageSource(): string {
+    return this.imageSourceString;
   }
 
 }
