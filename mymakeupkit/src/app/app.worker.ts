@@ -5,8 +5,8 @@ addEventListener('message', ({ data }) => {
   if (data.name === 'addData') {
     addData(data.data);
   } else if (data.name === 'updateDataSingle') {
-    updateData(data.id, data.data);
+    updateData(data.data.id, data.data);
   } else if (data.name === 'deleteDataSingle') {
-    deleteData(data.id);
+    deleteData(data.data.id);
   }
 });
