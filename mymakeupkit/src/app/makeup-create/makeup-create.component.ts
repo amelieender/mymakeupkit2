@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
@@ -15,7 +16,7 @@ export class MakeupCreateComponent implements OnInit {
   createMode: boolean = false;
   submitLabel: string = 'Create';
 
-  constructor(private ms: MakeupStoreService, public dialog: MatDialog, private router: Router) { }
+  constructor(private ms: MakeupStoreService, public dialog: MatDialog, private router: Router, public snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
   }
@@ -28,8 +29,16 @@ export class MakeupCreateComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.ms.create(this.makeup);
+        this.openSnackBar("Saved for Synchronization");
         this.router.navigateByUrl('/makeup');
       }
+    });
+  }
+
+
+  openSnackBar(message: string) {
+    this.snackBar.open(message, undefined, {
+      duration: 2000,
     });
   }
 

@@ -29,6 +29,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle'; 
 import {MatCardModule} from '@angular/material/card';
 import {WebcamModule} from 'ngx-webcam';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import {WebcamModule} from 'ngx-webcam';
     MatIconModule,
     MatSlideToggleModule,
     MatCardModule,
+    MatSnackBarModule,
     ServiceWorkerModule.register('sw-sync.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable

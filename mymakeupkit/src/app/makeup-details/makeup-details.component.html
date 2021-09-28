@@ -1,31 +1,9 @@
 <div *ngIf="makeup">
-    <h1>{{ makeup.productname }}</h1>
-    <mat-divider></mat-divider>
-    <div class="details-container">
-      <div class="details-item">
-          <h4>Brand</h4>
-          {{ makeup.brandname }}
-        </div>
-        <div class="details-item">
-          <h4>Category</h4>
-          {{ makeup.category }}
-        </div>
-        <div class="details-item">
-          <h4>Opened</h4>
-          {{ openedDisplayString }}
-        </div>
-        <div class="details-item">
-          <h4>Durability</h4>
-            {{ getDurabilityString() }}
-        </div>
-    </div>
-    <div class="buttons">
-      <button mat-raised-button color="primary" (click)="toggleEditMode(true)">
-        Edit
-      </button>
+    <ae-makeup-form [makeup]="makeup" [submitLabel]="submitLabel" (updateEvent)="update($event)"></ae-makeup-form>
+    <div class="delete">
+      <p>Do you want to delete this Item?</p>
       <button mat-flat-button color="warn" (click)="deleteOne(makeup)">
         Delete
       </button>
-    </div>
-    <ae-makeup-form [makeup]="makeup" [submitLabel]="submitLabel" *ngIf="editMode" (updateEvent)="update($event)"></ae-makeup-form>
+      </div>
 </div>

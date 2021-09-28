@@ -77,6 +77,9 @@ export class MakeupListComponent {
 
 
   showInstall() {
+    if (!this.deferredPrompt) {
+      return;
+    }
     // Show the prompt
     this.deferredPrompt.prompt();
     // Wait for the user to respond to the prompt

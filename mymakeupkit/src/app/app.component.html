@@ -19,7 +19,7 @@
       <!-- <mat-icon>search</mat-icon> -->
       <input *ngIf="isLoggedInStatus" matInput class="search-bar" type="text" placeholder="Search" (input)="handleSearchInputChangeEvent($event)">
     </div>
-    <mat-slide-toggle class="notifications-toggle">Notifications</mat-slide-toggle>
+    <mat-slide-toggle *ngIf="isLoggedInStatus" class="notifications-toggle">Notifications</mat-slide-toggle>
   </mat-toolbar>
 
   <div class="main-content">
