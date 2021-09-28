@@ -44,3 +44,18 @@ self.addEventListener("sync", (event) => {
     );
   }
 });
+
+self.addEventListener("push", (event) => {
+  console.log("push notification received", event);
+  let data = { title: "Test", content: "Fallback message" };
+  if (event.data) {
+    data = JSON.parse(event.data.text());
+  }
+
+  let options = {
+    body: data.content,
+    icon: "/assets/icons/kiss96.png",
+  };
+
+  event.waitUntil(self.registration.showNotification(data.title, options));
+});

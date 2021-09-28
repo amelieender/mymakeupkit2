@@ -20,6 +20,7 @@ app.get("/", (req, res) => {
 
 require("./app/routes/makeup.routes.js")(app);
 require("./app/routes/user.routes.js")(app);
+require("./app/routes/sub.routes")(app);
 
 // set port, listen for requests
 app.listen(3000, () => {

@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "web-push": "web-push"
   },
   "keywords": [
     "restapi",
@@ -21,7 +22,8 @@
     "express-jwt": "^6.0.0",
     "js-sha256": "^0.9.0",
     "jsonwebtoken": "^8.5.1",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "web-push": "^3.4.5"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"
