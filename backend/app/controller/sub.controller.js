@@ -5,14 +5,14 @@ const {
   privateVapidKey,
 } = require("../../config/push-notifications");
 
-const pushSubscription = {
+let pushSubscription = {
   endpoint:
-    "https://fcm.googleapis.com/fcm/send/dgHEmnqJ50s:APA91bHDAXUPtXBPOuE9UQcFtnuGPVYOvwC0cSXkWsLrJ5l5ZFiLOJFyGutVlAm43KxiSZzsZgv0c2dTy19AfkuaRacZqDIdixVmC7Jd5MiEoh9n5ZHMbf_aAWFKotfsV6aWyacMZScz",
+    "https://fcm.googleapis.com/fcm/send/cxn66AQ9LSY:APA91bFO7fOFerbbAyLwiDHDjvqi4ssluYVf9aKLR7PcDkAG5xXYXIO5-tbYTPhpC-qVIlvHHdO23xF2O1EThZhyeLJrnBA5L9sjqw4dAKbzLZ0r-kx9NIcNi7Hcxs1MeiS0xKUtk88j",
   expirationTime: null,
   keys: {
     p256dh:
-      "BMQd_09RImamq3BHgh7s_VDxY81MZ48pCWlk7oVCrvVxMBz--LUicmkwi10K1MH1BNDZaj3wFpXq0xMG1Wb9teo",
-    auth: "WJi2HLKnQcHF-5dKNijdaQ",
+      "BCGxcFZEV5WgvIWl4z5SqImKwWaM0odGaG_K45DywL6bPK30cFYbk-hHMmaIE8FHU6uwlsURe1JAHK5nxOWnA1M",
+    auth: "yd45xYA7Rsyzm100czOjBA",
   },
 };
 
@@ -20,6 +20,7 @@ module.exports = {
   SubscriptionController: {
     subscribe: (req, res) => {
       const subscription = req.body;
+      pushSubscription = subscription;
       console.log("subscription", subscription);
       res.status(201).json({ message: "subscription received" });
 

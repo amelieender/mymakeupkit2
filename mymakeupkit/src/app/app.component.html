@@ -42,34 +42,34 @@
     </a>
     <!-- <span class="example-spacer"></span> -->
     <div fxShow="true" fxHide.lt-md="true">
-      <a *ngIf="isLoggedInStatus" routerLink="/makeup" routerLinkActive="active" class="item">
+      <a routerLink="/makeup" routerLinkActive="active" class="item">
         <button mat-button>MakeUp</button>
       </a>
-      <a *ngIf="isLoggedInStatus" routerLink="/create" routerLinkActive="active" class="item">
+      <a routerLink="/create" routerLinkActive="active" class="item">
         <button mat-button>Add Item</button>
       </a>
-      <a *ngIf="isLoggedInStatus" routerLink="/login" routerLinkActive="active" class="item">
+      <a routerLink="/login" routerLinkActive="active" class="item">
         <button mat-button>Logout</button>
       </a>
     </div>
     <div class="search">
       <!-- <mat-icon>search</mat-icon> -->
-      <input *ngIf="isLoggedInStatus" matInput class="search-bar" type="text" placeholder="Search" (input)="handleSearchInputChangeEvent($event)">
+      <input matInput class="search-bar" type="text" placeholder="Search" (input)="handleSearchInputChangeEvent($event)">
    </div>
    <div fxShow="true" fxHide.lt-md="true">
-    <mat-slide-toggle *ngIf="isLoggedInStatus" (change)="handleNotificationToggleChange($event)" class="notifications-toggle">Notifications</mat-slide-toggle>
+    <mat-slide-toggle (change)="handleNotificationToggleChange($event)" class="notifications-toggle">Notifications</mat-slide-toggle>
    </div>
   </mat-toolbar>
   <mat-sidenav-container fxFlexFill class="example-container">
     <mat-sidenav color="primary" #sidenav fxLayout="column" mode="over"  opened="false" fxHide.gt-sm="true">
       <div fxLayout="column">
-        <a *ngIf="isLoggedInStatus" routerLink="/makeup" routerLinkActive="active" class="item">
+        <a routerLink="/makeup" routerLinkActive="active" class="item">
           <button class="sidenav-button" mat-button>MakeUp</button>
         </a>
-        <a *ngIf="isLoggedInStatus" routerLink="/create" routerLinkActive="active" class="item">
+        <a routerLink="/create" routerLinkActive="active" class="item">
           <button class="sidenav-button" mat-button>Add Item</button>
         </a>
-        <a *ngIf="isLoggedInStatus" routerLink="/login" routerLinkActive="active" class="item">
+        <a routerLink="/login" routerLinkActive="active" class="item">
           <button class="sidenav-button" mat-button>Logout</button>
         </a>   
       </div>

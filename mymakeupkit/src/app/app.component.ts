@@ -21,9 +21,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.isLoggedIn = this.auth.getAuthToken() ? true : false;
-    if (!this.isLoggedIn) {
-      this.router.navigateByUrl('/login');
-    }
     this.auth.getAuthStatus().subscribe((status) => (this.isLoggedIn = status));
   }
 

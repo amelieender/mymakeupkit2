@@ -8,7 +8,6 @@ export class AuthService {
   public isLoggedInStatus$: Subject<boolean> = new ReplaySubject<boolean>(1);
 
   constructor() {
-    this.clearStorage();
     this.isLoggedInStatus$.next(false);
   }
 

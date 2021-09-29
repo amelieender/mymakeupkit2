@@ -67,7 +67,7 @@ export class MakeupListComponent {
   }
 
   @HostListener('window:beforeinstallprompt', ['$event'])
-  onbeforeinstallprompt(e: { preventDefault: () => void; }) {
+  onbeforeinstallprompt(e: Event) {
     console.log(e);
     // Prevent Chrome 67 and earlier from automatically showing the prompt
     e.preventDefault();
