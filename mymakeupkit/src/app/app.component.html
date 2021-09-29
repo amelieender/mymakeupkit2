@@ -1,10 +1,47 @@
-<div id="app">
+<!-- <div id="app">
   <mat-toolbar color="primary" class="toolbar">
     <img src="/assets/icons/kiss72.png" alt="mymakeupkitlogo">
     <div class="navigation">
       <a routerLink="/home" routerLinkActive="active" class="item">
-        <button mat-button>Home</button>
+        <button mat-button>MyMakeupKit</button>
       </a>
+      <a *ngIf="isLoggedInStatus" routerLink="/makeup" routerLinkActive="active" class="item">
+        <button mat-button>MakeUp</button>
+      </a>
+      <a *ngIf="isLoggedInStatus" routerLink="/create" routerLinkActive="active" class="item">
+        <button mat-button>Add Item</button>
+      </a>
+      <a *ngIf="isLoggedInStatus" routerLink="/login" routerLinkActive="active" class="item">
+        <button mat-button>Logout</button>
+      </a>
+    </div>
+    <div class="search">
+       <mat-icon>search</mat-icon> -->
+      <!-- <input *ngIf="isLoggedInStatus" matInput class="search-bar" type="text" placeholder="Search" (input)="handleSearchInputChangeEvent($event)">
+    </div>
+    <mat-slide-toggle *ngIf="isLoggedInStatus" (change)="handleNotificationToggleChange($event)" class="notifications-toggle">Notifications</mat-slide-toggle>
+  </mat-toolbar>
+
+  <div class="main-content">
+    <router-outlet></router-outlet>
+  </div>
+</div>  -->
+
+<div id="app"> 
+  <mat-toolbar color="primary">
+    <div fxShow="true" fxHide.gt-sm="true">
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+    <div fxShow="true" fxHide.lt-md="true">
+      <img src="/assets/icons/kiss72.png" alt="mymakeupkitlogo">
+    </div>
+    <a routerLink="/home" routerLinkActive="active" class="item">
+      <button mat-button>MyMakeupKit</button>
+    </a>
+    <!-- <span class="example-spacer"></span> -->
+    <div fxShow="true" fxHide.lt-md="true">
       <a *ngIf="isLoggedInStatus" routerLink="/makeup" routerLinkActive="active" class="item">
         <button mat-button>MakeUp</button>
       </a>
@@ -18,11 +55,27 @@
     <div class="search">
       <!-- <mat-icon>search</mat-icon> -->
       <input *ngIf="isLoggedInStatus" matInput class="search-bar" type="text" placeholder="Search" (input)="handleSearchInputChangeEvent($event)">
-    </div>
+   </div>
+   <div fxShow="true" fxHide.lt-md="true">
     <mat-slide-toggle *ngIf="isLoggedInStatus" (change)="handleNotificationToggleChange($event)" class="notifications-toggle">Notifications</mat-slide-toggle>
+   </div>
   </mat-toolbar>
-
-  <div class="main-content">
-    <router-outlet></router-outlet>
-  </div>
+  <mat-sidenav-container fxFlexFill class="example-container">
+    <mat-sidenav color="primary" #sidenav fxLayout="column" mode="over"  opened="false" fxHide.gt-sm="true">
+      <div fxLayout="column">
+        <a *ngIf="isLoggedInStatus" routerLink="/makeup" routerLinkActive="active" class="item">
+          <button class="sidenav-button" mat-button>MakeUp</button>
+        </a>
+        <a *ngIf="isLoggedInStatus" routerLink="/create" routerLinkActive="active" class="item">
+          <button class="sidenav-button" mat-button>Add Item</button>
+        </a>
+        <a *ngIf="isLoggedInStatus" routerLink="/login" routerLinkActive="active" class="item">
+          <button class="sidenav-button" mat-button>Logout</button>
+        </a>   
+      </div>
+    </mat-sidenav>
+    <mat-sidenav-content fxFlexFill>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </div>

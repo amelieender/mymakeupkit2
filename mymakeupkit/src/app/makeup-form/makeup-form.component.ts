@@ -7,6 +7,7 @@ import { WebcamImage } from 'ngx-webcam';
 import { throttle } from 'lodash';
 import { GeolocationService } from '@ng-web-apis/geolocation';
 import { take } from 'rxjs/operators';
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 
 // typescript version was too old to have this
 // @see https://stackoverflow.com/questions/65916073/angular-11-why-cant-the-compiler-find-geolocationposition-during-compiling
@@ -43,6 +44,7 @@ export class MakeupFormComponent implements OnInit {
   photoTrigger: Subject<void> = new Subject<void>();
   // latest snapshot
   webcamImage: WebcamImage | null = null;
+  webcamWidth: number = 700;
   imageSourceString: string = '';
   takePhoto: Function = throttle(() => this.photoTrigger.next(), 500);
   geoPosition: GeoCoordinates | null = null;
@@ -50,7 +52,8 @@ export class MakeupFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private location: Location,
-    public readonly geolocation$: GeolocationService
+    public readonly geolocation$: GeolocationService,
+    private breakpointObserver: BreakpointObserver
   ) {
     this.form = this.fb.group({
       idControl: [''],
@@ -105,6 +108,16 @@ export class MakeupFormComponent implements OnInit {
     if (this.makeup?.image) {
       this.imageSourceString = `data:image/jpeg;base64,${this.makeup.image}`;
     }
+
+    this.breakpointObserver
+      .observe(['(max-width: 770px)'])
+      .subscribe((state: BreakpointState) => {
+        if (state.matches) {
+          this.webcamWidth = 300;
+        } else {
+          this.webcamWidth = 700;
+        }
+      });
   }
 
   handleImage(webcamImage: WebcamImage): void {

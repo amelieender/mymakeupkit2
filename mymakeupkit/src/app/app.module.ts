@@ -17,6 +17,7 @@ import { MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatSidenavModule} from '@angular/material/sidenav'; 
 import {MatListModule} from '@angular/material/list';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatIconModule} from '@angular/material/icon';
@@ -30,6 +31,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatCardModule} from '@angular/material/card';
 import {WebcamModule} from 'ngx-webcam';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    FlexLayoutModule,
     MatDialogModule,
     MatButtonModule,
     MatInputModule,
@@ -61,6 +64,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatSlideToggleModule,
     MatCardModule,
     MatSnackBarModule,
+    MatSidenavModule,
     ServiceWorkerModule.register('sw-sync.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable

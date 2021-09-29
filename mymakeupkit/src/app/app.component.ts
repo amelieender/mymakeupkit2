@@ -1,6 +1,7 @@
 import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { Router } from '@angular/router';
 import { AuthService } from './services/auth.service';
 import { SearchbarService } from './services/searchbar.service';
 
@@ -12,7 +13,7 @@ import { SearchbarService } from './services/searchbar.service';
 export class AppComponent implements OnInit {
   private isLoggedIn: boolean = false;
 
-  constructor(private auth: AuthService, private searchbar: SearchbarService) {}
+  constructor(private auth: AuthService, private searchbar: SearchbarService, private router: Router) {}
 
   get isLoggedInStatus() {
     return this.isLoggedIn;
@@ -20,6 +21,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.isLoggedIn = this.auth.getAuthToken() ? true : false;
+    if (!this.isLoggedIn) {
+      this.router.navigateByUrl('/login');
+    }
     this.auth.getAuthStatus().subscribe((status) => (this.isLoggedIn = status));
   }
 

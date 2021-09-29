@@ -18,14 +18,14 @@
             </mat-error>
           </mat-form-field>
         </div>
-        <button mat-button type = "submit" value = "Login">
+        <button mat-flat-button color="primary" type = "submit" value = "Login">
           Login
         </button>
       </form>
     </div>
     <div class = 'col-md-4 offset-4 mt-5' *ngIf = 'this.isLogin'>
       <h1>You are logged in</h1>
-      <button mat-button class = 'btn btn-outline-info' (click) = 'logout()'>Log-out</button>
+      <button mat-flat-button color="warn" class = 'btn btn-outline-info' (click) = 'logout()'>Log-out</button>
     </div>
     <div *ngIf="errorMessage">
       {{ errorMessage }}

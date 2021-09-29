@@ -2,7 +2,7 @@
   border: #673ab7 2px solid;
   border-radius: 10px;
   margin: 30px;
-  padding: 10px;
+  padding-top: 10px;
   margin-top: 30px;
   text-align: center;
   background-color: white;
@@ -12,15 +12,24 @@
   display: flex;
 }
 
-.mat-raised-button{
-margin: 5px;
+.mat-raised-button {
+  margin: 5px;
 }
 
-.update-button{
-    justify-content: center;
+.update-button {
+  justify-content: center;
 }
 
 .col-form-label {
   font-weight: 500;
 }
 
+@media (max-width: 770px) {
+  .image,
+  webcam-container > * {
+    max-width: 300px;
+  }
+  .makeup-form {
+    margin: 2px;
+  }
+}
